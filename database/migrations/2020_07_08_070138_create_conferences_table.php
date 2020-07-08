@@ -15,9 +15,8 @@ class CreateConferencesTable extends Migration
     {
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('symptoms');
-            $table->integer('cases');
+            $table->string('title');
+            $table->json('chairs');
             $table->timestamps();
         });
     }
