@@ -1,0 +1,14 @@
+<?php
+$MUNConfig=array(
+  "Database"=>array(
+    "account"=>"",
+    "password"=>"",
+    "host"=>"localhost",
+    "name"=>"MUNSystem",
+    "table_pre"=>"",
+    "type"=>"mysql"
+  ),
+  "Site"=>array(
+    "URL"=>""
+  )
+);
