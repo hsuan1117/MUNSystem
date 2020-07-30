@@ -17,10 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/1', function () {
-    return "123";
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/manage/users', 'ManageController@users')->name('manage.users');
+Route::get('/manage', 'ManageController@home')->name('manage.home');
