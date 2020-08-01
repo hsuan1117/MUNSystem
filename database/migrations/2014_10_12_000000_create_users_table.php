@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            //參與的會議 (以JSON儲存)
+            $table->json('conferences');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

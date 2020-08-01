@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConferencesTable extends Migration
+class ConferenceModel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,7 @@ class CreateConferencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('conferences', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->json('chairs');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -28,6 +23,6 @@ class CreateConferencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conferences');
+        //
     }
 }

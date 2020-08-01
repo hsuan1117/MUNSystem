@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Conference extends Model
+class Participant extends Model
 {
     protected $primaryKey = 'conference_id';
     protected $casts = [
-
+        'chairs'=>"array",
     ];
-
     protected $fillable = [
-        'title'
+        'chairs',
+
     ];
 }
