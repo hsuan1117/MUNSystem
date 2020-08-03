@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Conference;
+use App\Participant;
 class AppController extends Controller
 {
     public function __construct()
@@ -16,4 +18,5 @@ class AppController extends Controller
     {
         return view('app.home');
     }
+
 }

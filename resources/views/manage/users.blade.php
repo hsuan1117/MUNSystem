@@ -22,7 +22,7 @@
                                 </li>
                                 <div class="collapse" id="collapse_user_{{$user->id}}">
                                     <div class="card card-body">
-                                        {{gettype($user->conferences)}}
+                                        Conference:{{count($user->conferences)}}
                                     </div>
                                 </div>
                             @endforeach

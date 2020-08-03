@@ -5,11 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('App') }}</div>
+                    <div class="card-header">{{ __('Conference') }}</div>
 
                     <div class="card-body">
-                        Welcome to SweetMUN !!!
-                        <a href="{{route('app.conference.home')}}">Conference</a>
+                        {{$conf_id}}
+                        {{gettype($conf_data)}}
                     </div>
                 </div>
             </div>

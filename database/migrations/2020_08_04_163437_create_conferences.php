@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ConferenceModel extends Migration
+class CreateConferences extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class ConferenceModel extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('conferences', function (Blueprint $table) {
+            $table->increments('conference_id');;
+            $table->string('title');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class ConferenceModel extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('conferences');
     }
 }
