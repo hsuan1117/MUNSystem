@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participant extends Model
 {
-    protected $primaryKey = 'conference_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'role',
         'account'
     ];
     /* *
-     * | Conference_id | role | account |
+     * | id | role | account |
      * |       1       | chairs |   1   |
      * |       1       | chairs |   2   |
      * |       1       | Japan  |   3   |

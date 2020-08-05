@@ -26,5 +26,7 @@ Route::get('/app', 'AppController@home')->name('app.home');
 Route::get('/app/conference', 'ConferenceController@home')->name('app.conference.home');
 Route::get('/app/conference/add', 'ConferenceController@addConferenceUI')->name('app.conference.add');
 Route::get('/app/conference/{conferenceID}', 'ConferenceController@showConference')->name('app.conference.conference');
+Route::get('/app/conference/{conferenceID}/role', 'ConferenceRoleController@home')->name('app.conference.role.home');
+Route::get('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRoleUI')->name('app.conference.role.add');
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');

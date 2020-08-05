@@ -9,14 +9,19 @@ use App\Participant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ConferenceController extends Controller
+class ConferenceRoleController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+    public function addRoleUI()
+    {
+        return view('app.conference.role.add')
+            ->with("page","before");
+    }
 
-    public function addConference(Request $request)
+    public function addRole(Request $request)
     {
         $confTitle = $request->input("title");
         try {
@@ -45,36 +50,15 @@ class ConferenceController extends Controller
             ->with("page","after")
             ->with("status","ok");
     }
-
-    public function showConference($conferenceID)
-    {
-        $conf = Conference::where("id",$conferenceID)->first();
-        return view('app.conference.conference')
-            ->with("conf_id",$conferenceID)
-            ->with("conf_data",$conf);
-    }
-
-    public function addConferenceUI()
-    {
-        return view('app.conference.add')
-            ->with("page","before");
-    }
-
     //目錄
-    public function home()
+    public function home($conferenceID)
     {
-        // User [name,level,conferences]
-        $currUser = User::where("id",Auth::id())->first();
-
-        // Conference (Only for conference in user)
-        //   [title]
-        $confData = array();
-        foreach($currUser->conferences as $conf){
-            $confData[$conf]=Conference::where("id",$conf)->first()->title;
-        }
-
-        return view('app.conference.home')
-            ->with("userData",$currUser)
-            ->with("confData",$confData);
+        $roles = Participant::where("id",$conferenceID)->get() ?? [];
+        /*if(is_null($roles)){
+            $roles = [];
+        }*/
+        return view('app.conference.role.home')
+            ->with('roles',$roles)
+            ->with('conf_id',$conferenceID);
     }
 }

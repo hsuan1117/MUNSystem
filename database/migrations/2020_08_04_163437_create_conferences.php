@@ -14,8 +14,9 @@ class CreateConferences extends Migration
     public function up()
     {
         Schema::create('conferences', function (Blueprint $table) {
-            $table->increments('conference_id');;
-            $table->string('title');
+            $table->increments('id');
+            $table->string('title')->unique();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

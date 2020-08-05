@@ -14,7 +14,7 @@ class CreateParticipants extends Migration
     public function up()
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->string('conference_id');;
+            $table->integer('id');
             $table->string('role');
             $table->string('account');
             $table->timestamps();

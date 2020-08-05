@@ -9,7 +9,8 @@
 
                     <div class="card-body">
                         {{$conf_id}}
-                        {{gettype($conf_data)}}
+                        {{gettype($conf_data)}}<br>
+                        <a href="{{route('app.conference.role.home',$conf_id)}}" class="btn btn-primary">Conference Roles</a>
                     </div>
                 </div>
             </div>
