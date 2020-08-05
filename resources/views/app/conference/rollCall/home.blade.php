@@ -5,11 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Conference Role Home') }}</div>
+                    <div class="card-header">{{ __('Conference Roll Call') }}</div>
 
                     <div class="card-body">
                         Welcome to SweetMUN !!!<br>
-                        roles: {{count($roles)}}
                         <ol class="list-group">
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
@@ -17,16 +16,17 @@
                                 >
                                     {{$role}}
                                 </li>
-                                <div class="collapse" id="collapse_role_{{$role}}">
-                                    @foreach($account as $user)
-                                        <ol>{{$user}}</ol>
-                                    @endforeach
+                                <div class="collapse show " id="collapse_role_{{$role}}">
+                                    <roll-call
+                                        :endpoint="'{{route('app.conference.action.roleCall.change',$conf_id)}}'"
+                                        :role="{{$role}}"
+                                        :status="{{$rollCalls[$role]}}"
+                                    ></roll-call>
                                 </div>
                             @endforeach
+
                         </ol>
-                        <br>
-                        <a href="{{route('app.conference.role.add',$conf_id)}}" class="btn btn-primary">Add Role</a>
-                        <!--<div class="btn-group-vertical w-100">
+                    <!--<div class="btn-group-vertical w-100">
                             <a href="{{route('app.conference.add')}}" class="btn btn-primary">Add Conference</a>
                             <a href="{{route('app.conference.add')}}" class="btn btn-info disabled">Join Conference</a>
                         </div>-->
@@ -35,4 +35,5 @@
             </div>
         </div>
     </div>
+
 @endsection

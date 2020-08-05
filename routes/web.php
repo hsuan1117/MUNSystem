@@ -28,5 +28,8 @@ Route::get('/app/conference/add', 'ConferenceController@addConferenceUI')->name(
 Route::get('/app/conference/{conferenceID}', 'ConferenceController@showConference')->name('app.conference.conference');
 Route::get('/app/conference/{conferenceID}/role', 'ConferenceRoleController@home')->name('app.conference.role.home');
 Route::get('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRoleUI')->name('app.conference.role.add');
+Route::get('/app/conference/{conferenceID}/rollCall', 'ConferenceRollCallController@home')->name('app.conference.roleCall.home');
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');
+Route::post('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRole')->name('app.conference.action.role.add');
+Route::post('/app/conference/{conferenceID}/rollCall/change', 'ConferenceRollCallController@change')->name('app.conference.action.roleCall.change');

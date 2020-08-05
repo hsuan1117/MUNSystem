@@ -11,6 +11,7 @@
                         {{$conf_id}}
                         {{gettype($conf_data)}}<br>
                         <a href="{{route('app.conference.role.home',$conf_id)}}" class="btn btn-primary">Conference Roles</a>
+                        <a href="{{route('app.conference.roleCall.home',$conf_id)}}" class="btn btn-primary">Roll Call</a>
                     </div>
                 </div>
             </div>

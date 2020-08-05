@@ -15,38 +15,30 @@ class ConferenceRoleController extends Controller
     {
         $this->middleware('auth');
     }
-    public function addRoleUI()
+    public function addRoleUI($conferenceID)
     {
         return view('app.conference.role.add')
-            ->with("page","before");
+            ->with("page","before")
+            ->with("conf_id",$conferenceID);
     }
 
-    public function addRole(Request $request)
+    public function addRole(Request $request,$conferenceID)
     {
-        $confTitle = $request->input("title");
-        try {
-            DB::beginTransaction();
-            $id = DB::table("conferences")->insertGetId([
-                'title' => $confTitle
-            ]);
-            $origin = DB::table("users")
-                ->where('id', Auth::id())
-                ->get()
-                ->first()
-                ->conferences;
-            $origin = json_decode($origin,true);
-            array_push($origin,$id);
-            DB::table("users")
-                ->where('id', Auth::id())
-                ->update([
-                    'conferences'=>json_encode($origin)
-                ]);
-            DB::commit();
-        } catch (\PDOException $e) {
-            DB::rollBack();
-        }
-        return view('app.conference.add')
-            ->with("title",$confTitle)
+        $roleName = $request->input("role");
+        $userId    = $request->input("id");
+        DB::table("participants")->insert([
+            'id'=>$conferenceID,
+            'role'=>$roleName,
+            'account'=>$userId
+        ]);
+        DB::table("roll_calls")->updateOrInsert([
+            'id'=>$conferenceID,
+            'role'=>$roleName,
+            'status'=>"A"
+        ]);
+        return view('app.conference.role.add')
+            ->with("role",$roleName)
+            ->with("id",$userId)
             ->with("page","after")
             ->with("status","ok");
     }
@@ -54,11 +46,16 @@ class ConferenceRoleController extends Controller
     public function home($conferenceID)
     {
         $roles = Participant::where("id",$conferenceID)->get() ?? [];
-        /*if(is_null($roles)){
-            $roles = [];
-        }*/
+        $newRoles = [];
+        foreach($roles as $role){
+            if(isset($newRoles[$role->role])){
+                array_push($newRoles[$role->role],$role->account);
+            }else{
+                $newRoles[$role->role] = [$role->account];
+            }
+        }
         return view('app.conference.role.home')
-            ->with('roles',$roles)
+            ->with('roles',$newRoles)
             ->with('conf_id',$conferenceID);
     }
 }
