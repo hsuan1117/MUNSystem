@@ -19,8 +19,8 @@
                                 <div class="collapse show " id="collapse_role_{{$role}}">
                                     <roll-call
                                         :endpoint="'{{route('app.conference.action.roleCall.change',$conf_id)}}'"
-                                        :role="{{$role}}"
-                                        :status="{{$rollCalls[$role]}}"
+                                        :role="'{{$role}}'"
+                                        :status="'{{$rollCalls[$role]}}'"
                                     ></roll-call>
                                 </div>
                             @endforeach

@@ -18,7 +18,7 @@ class ConferenceRollCallController extends Controller {
     public function change(Request $request, $conferenceID) {
         $role = $request->input('role');
         $status = $request->input('status');
-        Participant::where("id", $conferenceID)
+        RollCall::where("id", $conferenceID)
             ->where('role', $role)
             ->update([
                 'status' => $status

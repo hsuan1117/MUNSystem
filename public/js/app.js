@@ -1926,13 +1926,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "roll-call",
   props: ['endpoint', 'role', 'status'],
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {},
+  methods: {
+    onClick: function onClick(e) {
+      console.log("get");
+      var that = this;
+      axios.post(that.endpoint, {
+        'status': e.currentTarget.innerText,
+        'role': that.role
+      }).then(function (res) {
+        console.table(res.data);
+        location.reload();
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
   }
 });
 
@@ -37481,100 +37492,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "btn-group d-flex" }, [
-    _vm.status == "P"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-primary w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("P")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("PV")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("A")]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.status == "A"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("P")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("PV")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-danger w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("A")]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.status == "PV"
-      ? _c("div", [
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("P")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-success w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("PV")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "RC btn btn-default w-100",
-              attrs: { type: "button" }
-            },
-            [_vm._v("A")]
-          )
-        ])
-      : _vm._e()
-  ])
+  return _vm.status === "A"
+    ? _c("div", { staticClass: "btn-group d-flex" }, [
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("P")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("PV")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-danger w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("A")]
+        )
+      ])
+    : _vm.status === "PV"
+    ? _c("div", { staticClass: "btn-group d-flex" }, [
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("P")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-success w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("PV")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("A")]
+        )
+      ])
+    : _vm.status === "P"
+    ? _c("div", { staticClass: "btn-group d-flex" }, [
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-primary w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("P")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("PV")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "RC btn btn-default w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.onClick($event)
+              }
+            }
+          },
+          [_vm._v("A")]
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
