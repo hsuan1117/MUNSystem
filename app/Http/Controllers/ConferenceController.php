@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\User;
 use App\Conference;
@@ -49,6 +50,7 @@ class ConferenceController extends Controller
     public function showConference($conferenceID)
     {
         $conf = Conference::where("id",$conferenceID)->first();
+        Session::put('ConferenceName', $conf->title);
         return view('app.conference.conference')
             ->with("conf_id",$conferenceID)
             ->with("conf_data",$conf);

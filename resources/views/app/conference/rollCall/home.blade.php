@@ -8,8 +8,14 @@
                     <div class="card-header">{{ __('Conference Roll Call') }}</div>
 
                     <div class="card-body">
-                        Welcome to SweetMUN !!!<br>
+                        Welcome to <b>{{Session::get('ConferenceName','Conference')}}</b> (ID: {{$conf_id}}) !!!<br>
+
                         <ol class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-success">
+                                <div>PV : {{$rollCallsCount["PV"]}}</div>
+                                <div>P : {{$rollCallsCount["P"]}}</div>
+                                <div>A : {{$rollCallsCount["A"]}}</div>
+                            </li>
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
                                     data-toggle="collapse" data-target="#collapse_role_{{$role}}"

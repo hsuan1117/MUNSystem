@@ -9,52 +9,57 @@ use App\Participant;
 use App\RollCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Speech;
+use DateTime;
+use DateTimeZone;
 
-class ConferenceRollCallController extends Controller {
+
+class ConferenceOpeningSpeechController extends Controller {
     public function __construct() {
         $this->middleware('auth');
     }
 
     public function change(Request $request, $conferenceID) {
         $role = $request->input('role');
-        $status = $request->input('status');
-        RollCall::where("id", $conferenceID)
+        $article = $request->input('article');
+        Speech::where("id", $conferenceID)
             ->where('role', $role)
-            ->update([
-                'status' => $status
+            ->updateOrInsert([
+                'id'=>$conferenceID,
+                'role'=>$role
+            ],[
+                'id'=>$conferenceID,
+                'role'=>$role,
+                'article' => $article
             ]);
         return response()->json([
             'role' => $role,
-            'status' => $status,
+            'status' => "ok",
         ]);
     }
 
     //目錄
     public function home($conferenceID) {
+        $x =new DateTime("now",new DateTimeZone("Asia/Taipei"));
+
         $roles = Participant::where("id", $conferenceID)->get() ?? [];
-        $rolls = RollCall::where("id", $conferenceID)->get() ?? [];
+        $speeches = Speech::where("id",$conferenceID)->get() ?? [];
         $newRoles = [];
-        $newRolls = [];
-        $rollsCnt = [
-          "PV"=>0,
-          "P"=>0,
-          "A"=>0
-        ];
-        foreach ($roles as $role) {
+        $newSpeeches = [];
+        foreach($roles as $role){
             if (isset($newRoles[$role->role])) {
                 array_push($newRoles[$role->role], $role->account);
             } else {
                 $newRoles[$role->role] = [$role->account];
             }
         }
-        foreach ($rolls as $status) {
-            $rollsCnt[$status->status]++;
-            $newRolls[$status->role] = $status->status;
+        foreach($speeches as $speech){
+            $newSpeeches[$speech->role] = $speech->article;
         }
-        return view('app.conference.rollCall.home')
+        return view('app.conference.openingSpeech.home')
             ->with('conf_id', $conferenceID)
             ->with('roles', $newRoles)
-            ->with('rollCalls', $newRolls)
-            ->with('rollCallsCount', $rollsCnt);
+            ->with('speeches',$newSpeeches)
+            ->with("EZTime",$x->format(DATE_ISO8601));
     }
 }

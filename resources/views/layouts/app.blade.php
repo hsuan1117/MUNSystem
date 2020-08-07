@@ -55,6 +55,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if (isset(Route::current()->parameters['conferenceID']))
+                                        <a class="dropdown-item" href="{{ route('app.conference.conference',Route::current()->parameters['conferenceID']) }}">
+                                            {{ __('Conference Home') }}
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('app.home') }}">
                                         {{ __('App') }}
                                     </a>

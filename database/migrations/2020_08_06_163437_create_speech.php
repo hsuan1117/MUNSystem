@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRollcall extends Migration
+class CreateSpeech extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRollcall extends Migration
      */
     public function up()
     {
-        Schema::create('roll_calls', function (Blueprint $table) {
+        Schema::create('speeches', function (Blueprint $table) {
             $table->integer('id');
-            $table->string('role')->unique();
-            $table->string('status');
+            $table->string('role');
+            $table->longText('article')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRollcall extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roll_calls');
+        Schema::dropIfExists('speeches');
     }
 }

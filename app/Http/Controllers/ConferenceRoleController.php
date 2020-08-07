@@ -33,6 +33,9 @@ class ConferenceRoleController extends Controller
         ]);
         DB::table("roll_calls")->updateOrInsert([
             'id'=>$conferenceID,
+            'role'=>$roleName
+        ],[
+            'id'=>$conferenceID,
             'role'=>$roleName,
             'status'=>"A"
         ]);
