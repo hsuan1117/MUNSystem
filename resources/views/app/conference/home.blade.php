@@ -23,6 +23,7 @@
                                 </li>
                                 <div class="collapse" id="collapse_conference_{{$confID}}">
                                     <div> ID: {{$confID}}</div>
+                                    <current-step endpoint="{{route('app.conference.action.getStep',$confID)}}"></current-step>
                                     <div>
                                         <a href="{{route('app.conference.conference',$confID)}}"
                                            class="btn btn-sm btn-success ">Conference Page</a>

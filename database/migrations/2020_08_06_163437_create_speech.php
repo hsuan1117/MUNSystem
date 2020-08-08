@@ -16,6 +16,7 @@ class CreateSpeech extends Migration
         Schema::create('speeches', function (Blueprint $table) {
             $table->integer('id');
             $table->string('role');
+            $table->string('start')->nullable();
             $table->longText('article')->nullable();
             $table->timestamps();
         });

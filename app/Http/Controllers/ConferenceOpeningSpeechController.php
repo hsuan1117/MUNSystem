@@ -15,8 +15,42 @@ use DateTimeZone;
 
 
 class ConferenceOpeningSpeechController extends Controller {
+    const SPEECH_SECONDS = 60;
     public function __construct() {
         $this->middleware('auth');
+    }
+
+    public function startSpeech(Request $request, $conferenceID){
+        $role = $request->input('role');
+        $now  = new DateTime("now",new DateTimeZone("Asia/Taipei"));
+        $current = Conference::where("id",$conferenceID)->first()->speechRole;
+        if(
+            is_null($current) ||
+            (time() - strtotime(Speech::where("id", $conferenceID)
+                ->where('role', $current)
+                ->first()
+                ->start) >= self::SPEECH_SECONDS)
+        ){
+            Conference::where("id",$conferenceID)->first()->update([
+                'speechRole'=>$role
+            ]);
+            Speech::where("id", $conferenceID)
+                ->where('role', $role)
+                ->updateOrInsert([
+                    'id'=>$conferenceID,
+                    'role'=>$role
+                ],[
+                    'start' => ($now->format(DATE_ISO8601))
+                ]);
+            return response()->json([
+                'start' => ($now->format(DATE_ISO8601)),
+                'status' => "ok"
+            ]);
+        }
+        return response()->json([
+            'status' => "fail"
+        ]);
+
     }
 
     public function change(Request $request, $conferenceID) {

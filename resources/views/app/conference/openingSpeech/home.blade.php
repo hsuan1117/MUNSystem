@@ -10,6 +10,7 @@
                     <div class="card-body">
                         Welcome to <b>{{Session::get('ConferenceName','Conference')}}</b> (ID: {{$conf_id}}) !!!<br>
                         Edit and reload page to see words effects!!<br>
+                        <current-speaking endpoint="{{route('app.conference.action.getSpeaking',$conf_id)}}"></current-speaking>
                         <count-down deadline="2020-08-08T12:00:00.000+08:00"></count-down>
                         <ol class="list-group">
                             {{$EZTime}}
@@ -22,6 +23,7 @@
                                 <div class="collapse " id="collapse_role_{{$role}}">
                                     <opening-speech
                                         endpoint="{{route('app.conference.action.openingSpeech.change',$conf_id)}}"
+                                        start-endpoint="{{route('app.conference.action.openingSpeech.startSpeech',$conf_id)}}"
                                         role="{{$role}}"
                                         :article="`{{$speeches[$role] ?? ""}}`"
                                     ></opening-speech>

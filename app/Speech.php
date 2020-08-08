@@ -10,7 +10,8 @@ class Speech extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'role',
-        'article'
+        'article',
+        'start'
     ];
     /* *
      * | id | role | status |

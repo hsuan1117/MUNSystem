@@ -23,6 +23,8 @@ window.Vue = require('vue');
 Vue.component('roll-call', require('./components/RollCall.vue').default);
 Vue.component('opening-speech', require('./components/OpeningSpeech.vue').default);
 Vue.component('count-down', require('./components/CountDown.vue').default);
+Vue.component('current-step', require('./components/CurrentStep.vue').default);
+Vue.component('current-speaking', require('./components/CurrentSpeaking.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

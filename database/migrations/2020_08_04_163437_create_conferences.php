@@ -16,6 +16,8 @@ class CreateConferences extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
+            $table->string('step')->default("RollCall");
+            $table->string('speechRole')->nullable();
             $table->string('password')->nullable();
             $table->timestamps();
         });

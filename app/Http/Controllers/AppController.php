@@ -13,6 +13,7 @@ class AppController extends Controller
         $this->middleware('auth');
     }
 
+
     //目錄
     public function home()
     {

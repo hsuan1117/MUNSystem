@@ -56,6 +56,22 @@ class ConferenceController extends Controller
             ->with("conf_data",$conf);
     }
 
+    public function getStep($conferenceID) {
+
+        $conf = Conference::where("id", $conferenceID)->first();
+        return response()->json([
+            'step' => $conf->step
+        ]);
+    }
+
+    public function getSpeaking($conferenceID) {
+
+        $conf = Conference::where("id", $conferenceID)->first();
+        return response()->json([
+            'role' => $conf->speechRole
+        ]);
+    }
+
     public function addConferenceUI()
     {
         return view('app.conference.add')

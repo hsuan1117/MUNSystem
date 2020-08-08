@@ -8,6 +8,6 @@ class Conference extends Model
 {
     protected $primaryKey = 'id';
     protected $fillable = [
-        'title','password'
+        'title','password','step','speechRole'
     ];
 }
