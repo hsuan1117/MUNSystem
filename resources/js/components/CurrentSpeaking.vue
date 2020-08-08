@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// TODO: import count-down in CurrentSpeaking
 export default {
     name: "current-speaking",
     props: ['endpoint'],
