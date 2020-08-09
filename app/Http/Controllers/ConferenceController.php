@@ -67,8 +67,10 @@ class ConferenceController extends Controller
     public function getSpeaking($conferenceID) {
 
         $conf = Conference::where("id", $conferenceID)->first();
+        $role = Participant::where("id",$conferenceID)->where("role",$conf->speechRole)->first();
         return response()->json([
-            'role' => $conf->speechRole
+            'role' => $conf->speechRole,
+            'start' => $role->start
         ]);
     }
 

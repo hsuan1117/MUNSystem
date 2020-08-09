@@ -1995,10 +1995,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CountDown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CountDown */ "./resources/js/components/CountDown.vue");
 //
 //
 //
 //
+//
+//
+//
+// TODO: import count-down in CurrentSpeaking
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "current-speaking",
   props: ['endpoint'],
@@ -2008,7 +2014,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      "role": "Loading ..."
+      "role": "Loading ...",
+      "start": ""
     };
   },
   methods: {
@@ -2016,6 +2023,8 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       axios.get(self.endpoint).then(function (res) {
         self.role = res.data.role || "";
+        var start = new Date(Date.parse(res.data.start) + 60000).toISOString();
+        self.start = start || "";
       })["catch"](function (error) {
         console.error(error);
       });
@@ -37772,10 +37781,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v("NOW Speaking: "),
-    _c("b", [_vm._v(_vm._s(_vm.role))])
-  ])
+  return _c(
+    "div",
+    [
+      _vm._v("\n    NOW Speaking: "),
+      _c("b", [_vm._v(_vm._s(_vm.role))]),
+      _vm._v(" "),
+      _c("count-down", { attrs: { deadline: _vm.start } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
