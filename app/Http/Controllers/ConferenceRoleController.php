@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Speech;
 use Illuminate\Http\Request;
 use App\User;
 use App\Conference;
@@ -39,6 +40,14 @@ class ConferenceRoleController extends Controller
             'role'=>$roleName,
             'status'=>"A"
         ]);
+        Speech::updateOrInsert([
+                'id'=>$conferenceID,
+                'role'=>$roleName
+            ],[
+                'id'=>$conferenceID,
+                'role'=>$roleName,
+                'article' => "default"
+            ]);
         return view('app.conference.role.add')
             ->with("role",$roleName)
             ->with("id",$userId)

@@ -32,9 +32,11 @@ Route::get('/app/conference/{conferenceID}/role', 'ConferenceRoleController@home
 Route::get('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRoleUI')->name('app.conference.role.add');
 Route::get('/app/conference/{conferenceID}/rollCall', 'ConferenceRollCallController@home')->name('app.conference.roleCall.home');
 Route::get('/app/conference/{conferenceID}/openingSpeech', 'ConferenceOpeningSpeechController@home')->name('app.conference.openingSpeech.home');
+Route::get('/app/conference/{conferenceID}/amendment', 'ConferenceAmendmentController@home')->name('app.conference.amendment.home');
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');
 Route::post('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRole')->name('app.conference.action.role.add');
 Route::post('/app/conference/{conferenceID}/rollCall/change', 'ConferenceRollCallController@change')->name('app.conference.action.roleCall.change');
 Route::post('/app/conference/{conferenceID}/openingSpeech/change', 'ConferenceOpeningSpeechController@change')->name('app.conference.action.openingSpeech.change');
 Route::post('/app/conference/{conferenceID}/openingSpeech/startSpeech', 'ConferenceOpeningSpeechController@startSpeech')->name('app.conference.action.openingSpeech.startSpeech');
+Route::post('/app/conference/{conferenceID}/amendment/change', 'ConferenceAmendmentController@change')->name('app.conference.action.amendment.change');

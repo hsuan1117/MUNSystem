@@ -13,6 +13,7 @@
                         <a href="{{route('app.conference.role.home',$conf_id)}}" class="btn btn-primary">Conference Roles (Countries)</a>
                         <a href="{{route('app.conference.roleCall.home',$conf_id)}}" class="btn btn-primary">Roll Call</a>
                         <a href="{{route('app.conference.openingSpeech.home',$conf_id)}}" class="btn btn-primary">Opening Speech</a>
+                        <a href="{{route('app.conference.amendment.home',$conf_id)}}" class="btn btn-primary">Amendment</a>
                     </div>
                 </div>
             </div>

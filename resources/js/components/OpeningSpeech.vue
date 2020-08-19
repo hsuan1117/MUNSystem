@@ -46,10 +46,10 @@ export default {
             axios.post(that.startEndpoint, {
                 'role': that.role
             }).then((res) => {
-                if(res.data.status === "fail")alert("No")
-                window.setTimeout(()=>{
-                    location.reload()
-                },3000)
+                if(res.data.status === "fail"){
+                    alert("Fail, "+(res.data.msg??"unknown"))
+                }
+
             }).catch((error) => {
                 console.error(error)
             })

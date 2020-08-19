@@ -37,7 +37,8 @@ export default {
         };
     },
     mounted() {
-        setTimeout(this.countdown, 1000);
+        this.countdown()
+        //setTimeout(this.countdown, 1000);
     },
     computed: {
         seconds() {
@@ -70,6 +71,9 @@ export default {
                 this.currentTime = null;
             }
         }
+    },
+    watch:{
+
     }
 }
 </script>

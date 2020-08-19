@@ -9,6 +9,7 @@ use App\Conference;
 use App\Participant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Speech;
 
 class ConferenceController extends Controller
 {
@@ -67,7 +68,9 @@ class ConferenceController extends Controller
     public function getSpeaking($conferenceID) {
 
         $conf = Conference::where("id", $conferenceID)->first();
-        $role = Participant::where("id",$conferenceID)->where("role",$conf->speechRole)->first();
+        //echo $conf;
+        $role = Speech::where("id",$conferenceID)->where("role",$conf->speechRole)->first();
+        //echo $role;
         return response()->json([
             'role' => $conf->speechRole,
             'start' => $role->start

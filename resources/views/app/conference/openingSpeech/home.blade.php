@@ -11,9 +11,8 @@
                         Welcome to <b>{{Session::get('ConferenceName','Conference')}}</b> (ID: {{$conf_id}}) !!!<br>
                         Edit and reload page to see words effects!!<br>
                         <current-speaking endpoint="{{route('app.conference.action.getSpeaking',$conf_id)}}"></current-speaking>
-                        <count-down deadline="2020-08-08T12:00:00.000+08:00"></count-down>
+                        <br>
                         <ol class="list-group">
-                            {{$EZTime}}
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
                                     data-toggle="collapse" data-target="#collapse_role_{{$role}}"

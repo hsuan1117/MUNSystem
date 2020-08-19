@@ -25,6 +25,7 @@ Vue.component('opening-speech', require('./components/OpeningSpeech.vue').defaul
 Vue.component('count-down', require('./components/CountDown.vue').default);
 Vue.component('current-step', require('./components/CurrentStep.vue').default);
 Vue.component('current-speaking', require('./components/CurrentSpeaking.vue').default);
+Vue.component('amendment', require('./components/Amendment.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,3 +36,6 @@ Vue.component('current-speaking', require('./components/CurrentSpeaking.vue').de
 const app = new Vue({
     el: '#app',
 });
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
