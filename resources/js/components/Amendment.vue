@@ -3,7 +3,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-center"
             data-toggle="collapse" :data-target="'#collapse_role_'+amendment.id"
         >
-            {{ amendment.role }} | {{ amendment.title }}
+            {{ amendment.role }} | {{ amendment.title }} (ID: {{amendment.id}})
             <i class="fa fa-check-circle text-success"
                data-toggle="tooltip" data-placement="top" title="Verified Amendment"
                v-if="amendment.accept === 'true'"></i>
@@ -18,17 +18,17 @@
             <div class="form-group">
                 <textarea class="form-control" rows="3" @change="update($event)" @input="update($event)">{{ amendment.article }}</textarea>
                 <div class="btn-group w-100" role="group">
-                    <button type="button" class="btn btn-success">
+                    <button type="button" data-status="true" @click="accept($event)" class="btn btn-success">
                         <i class="fa fa-check-circle "
                            data-toggle="tooltip" data-placement="top"
                            title="Verified Amendment"
                         ></i></button>
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" data-status="false" @click="accept($event)" class="btn btn-danger">
                         <i class="fa fa-times-circle "
                            data-toggle="tooltip" data-placement="top"
                            title="Rejected Amendment"
                         ></i></button>
-                    <button type="button" class="btn btn-info">
+                    <button type="button" data-status="pending" @click="accept($event)" class="btn btn-info">
                         <i class="fa fa-question-circle "
                            data-toggle="tooltip" data-placement="top"
                            title="Pending Amendment"></i>
@@ -42,7 +42,7 @@
 <script>
 export default {
     name: "amendment",
-    props: ['endpoint', 'amendment'],
+    props: ['endpoint','accept-endpoint', 'amendment'],
     mounted() {
         this.amendment = JSON.parse(this.amendment);
         //window.alert(this.amendment.role)
@@ -57,6 +57,19 @@ export default {
                 //console.table(res.data)
                 console.log("Saved Update")
                 //location.reload()
+            }).catch((error) => {
+                console.error(error)
+            })
+        },
+        accept(e){
+            var that = this
+            axios.post(that.acceptEndpoint, {
+                'status': e.currentTarget.dataset.status,
+                'id': that.amendment.id
+            }).then((res) => {
+                //console.table(res.data)
+                console.log("Saved Update")
+                location.reload()
             }).catch((error) => {
                 console.error(error)
             })

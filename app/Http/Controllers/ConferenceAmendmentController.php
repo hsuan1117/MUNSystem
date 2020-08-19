@@ -12,17 +12,58 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Speech;
 
-class ConferenceAmendmentController extends Controller
-{
-    public function __construct()
-    {
+class ConferenceAmendmentController extends Controller {
+    public function __construct() {
         $this->middleware('auth');
+    }
+
+    public function add(Request $request, $conferenceID) {
+        $role = Participant::where("id", $conferenceID)
+            ->where("account", Auth::user()->getAuthIdentifier())
+            ->first()
+            ->role;
+        $title = $request->input('title');
+        $article = $request->input('article');
+
+        Amendment::insert([
+            "article" => $article,
+            "role"=>$role,
+            "conf_id" => $conferenceID,
+            "title" => $title,
+            'accept' => "pending"
+        ]);
+        return view("app.conference.amendment.add")
+            ->with("page", "after")
+            ->with("title",$title)
+            ->with("status","ok");
+    }
+
+    public function addUI($conferenceID) {
+        return view("app.conference.amendment.add")
+            ->with("page", "before")
+            ->with("conf_id",$conferenceID);
+    }
+
+    public function accept(Request $request, $conferenceID) {
+        //$role = $request->input('role');
+        $status = $request->input("status");
+        $id = $request->input('id');
+        Amendment::where('id', $id)
+            ->updateOrInsert([
+                'id' => $id
+            ], [
+                'accept' => $status
+            ]);
+        return response()->json([
+            'id' => $id,
+            'status' => "ok",
+        ]);
     }
 
     public function change(Request $request, $conferenceID) {
         //$role = $request->input('role');
         $article = $request->input("article");
-        $id   = $request->input('id');
+        $id = $request->input('id');
         Amendment::where('id', $id)
             ->updateOrInsert([
                 'id' => $id
@@ -36,9 +77,8 @@ class ConferenceAmendmentController extends Controller
     }
 
     //目錄
-    public function home($conferenceID)
-    {
-        $amendments = Amendment::where("conf_id",$conferenceID)->get()->all();
+    public function home($conferenceID) {
+        $amendments = Amendment::where("conf_id", $conferenceID)->get()->all();
         /*Amendment::where("id",$conferenceID)->insert([
             "conf_id"=>$conferenceID,
             "role"=>"Japan",
@@ -47,7 +87,7 @@ class ConferenceAmendmentController extends Controller
             "accept"=>"pending"
         ]);*/
         return view('app.conference.amendment.home')
-            ->with("conf_id",$conferenceID)
-            ->with("amendments",$amendments);
+            ->with("conf_id", $conferenceID)
+            ->with("amendments", $amendments);
     }
 }

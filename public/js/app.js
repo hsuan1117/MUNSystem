@@ -1951,7 +1951,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "amendment",
-  props: ['endpoint', 'amendment'],
+  props: ['endpoint', 'accept-endpoint', 'amendment'],
   mounted: function mounted() {
     this.amendment = JSON.parse(this.amendment); //window.alert(this.amendment.role)
   },
@@ -1964,6 +1964,19 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         //console.table(res.data)
         console.log("Saved Update"); //location.reload()
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    accept: function accept(e) {
+      var that = this;
+      axios.post(that.acceptEndpoint, {
+        'status': e.currentTarget.dataset.status,
+        'id': that.amendment.id
+      }).then(function (res) {
+        //console.table(res.data)
+        console.log("Saved Update");
+        location.reload();
       })["catch"](function (error) {
         console.error(error);
       });
@@ -37842,7 +37855,9 @@ var render = function() {
             _vm._s(_vm.amendment.role) +
             " | " +
             _vm._s(_vm.amendment.title) +
-            "\n        "
+            " (ID: " +
+            _vm._s(_vm.amendment.id) +
+            ")\n        "
         ),
         _vm.amendment.accept === "true"
           ? _c("i", {
@@ -37900,69 +37915,86 @@ var render = function() {
             [_vm._v(_vm._s(_vm.amendment.article))]
           ),
           _vm._v(" "),
-          _vm._m(0)
+          _c(
+            "div",
+            { staticClass: "btn-group w-100", attrs: { role: "group" } },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  attrs: { type: "button", "data-status": "true" },
+                  on: {
+                    click: function($event) {
+                      return _vm.accept($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-check-circle ",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "top",
+                      title: "Verified Amendment"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button", "data-status": "false" },
+                  on: {
+                    click: function($event) {
+                      return _vm.accept($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-times-circle ",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "top",
+                      title: "Rejected Amendment"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info",
+                  attrs: { type: "button", "data-status": "pending" },
+                  on: {
+                    click: function($event) {
+                      return _vm.accept($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-question-circle ",
+                    attrs: {
+                      "data-toggle": "tooltip",
+                      "data-placement": "top",
+                      title: "Pending Amendment"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
         ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "btn-group w-100", attrs: { role: "group" } },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-success", attrs: { type: "button" } },
-          [
-            _c("i", {
-              staticClass: "fa fa-check-circle ",
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "top",
-                title: "Verified Amendment"
-              }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-danger", attrs: { type: "button" } },
-          [
-            _c("i", {
-              staticClass: "fa fa-times-circle ",
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "top",
-                title: "Rejected Amendment"
-              }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-info", attrs: { type: "button" } },
-          [
-            _c("i", {
-              staticClass: "fa fa-question-circle ",
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "top",
-                title: "Pending Amendment"
-              }
-            })
-          ]
-        )
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

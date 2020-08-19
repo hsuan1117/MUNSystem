@@ -13,9 +13,11 @@
                             @foreach($amendments as $amendment)
                                 <amendment
                                     endpoint="{{route('app.conference.action.amendment.change',$conf_id)}}"
+                                    accept-endpoint="{{route('app.conference.action.amendment.accept',$conf_id)}}"
                                     amendment="{{$amendment}}"></amendment>
                             @endforeach
                         </ol>
+                        <a href="{{route('app.conference.amendment.add',$conf_id)}}" class="btn btn-primary">Add Amendment</a>
                     </div>
                 </div>
             </div>
