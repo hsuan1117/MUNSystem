@@ -23,8 +23,16 @@ class ConferenceNoteController extends Controller {
     public function add(Request $request, $conferenceID) {
         $role = Participant::where("id", $conferenceID)
             ->where("account", Auth::id())
-            ->first()
-            ->role;
+            ->first();
+        if(is_null($role)){
+            return view("app.conference.note.add")
+                ->with("page", "after")
+                ->with("msg", "Please add the country first!")
+                ->with("conf_id",$conferenceID)
+                ->with("status", "fail");
+        }else{
+            $role = $role->role;
+        }
         $title = $request->input('title');
         $article = $request->input('article');
         $recipient = $request->input('recipient');
@@ -38,7 +46,8 @@ class ConferenceNoteController extends Controller {
         ]);
         return view("app.conference.note.add")
             ->with("page", "after")
-            ->with("title", $title)
+            ->with("msg", "The note '{$title}' is currently being reviewed!")
+            ->with("conf_id",$conferenceID)
             ->with("status", "ok");
     }
 
