@@ -56,7 +56,7 @@ class ConferenceController extends Controller
                     'conferences'=>array_unique($origin)
                 ]);
             }else{
-                return view('app.conference.join', 403)
+                return view('app.conference.join')
                     ->with("msg","Fail to join ")
                     ->with("page","after")
                     ->with("status","fail");
