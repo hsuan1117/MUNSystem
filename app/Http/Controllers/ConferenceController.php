@@ -126,7 +126,7 @@ class ConferenceController extends Controller
             $conf = Conference::all();
             $confData = array();
             foreach($conf as $_conf){
-                var_dump($_conf);
+                //var_dump($_conf);
                 $confData[$_conf->id]=$_conf->title;
             }
         }else{
