@@ -75,6 +75,7 @@ export default {
             }).then((res) => {
                 //console.table(res.data)
                 console.log("Saved Update")
+                alert(res.data.msg )
                 location.reload()
             }).catch((error) => {
                 console.error(error)

@@ -49,16 +49,35 @@ class ConferenceAmendmentController extends Controller {
         //$role = $request->input('role');
         $status = $request->input("status");
         $id = $request->input('id');
-        Amendment::where('id', $id)
-            ->updateOrInsert([
-                'id' => $id
-            ], [
-                'accept' => $status
+        $isAdmin  = false;
+        $userData = Participant::where("id",$conferenceID)
+            ->where("account",Auth::id())
+            ->first();
+        if(!is_null($userData)){
+            if($userData->role == "chair"){
+                $isAdmin = true;
+            }
+        }
+        if(Auth::user()->name == "admin")$isAdmin = true;
+        if($isAdmin){
+            Amendment::where('id', $id)
+                ->updateOrInsert([
+                    'id' => $id
+                ], [
+                    'accept' => $status
+                ]);
+            return response()->json([
+                'id' => $id,
+                'status' => "ok",
+                'msg'=>"OK! ID:{$id}"
             ]);
-        return response()->json([
-            'id' => $id,
-            'status' => "ok",
-        ]);
+        }else{
+            return response()->json([
+                'status' => "fail",
+                'msg'=>'Permission Denied'
+            ]);
+        }
+
     }
 
     public function change(Request $request, $conferenceID) {
@@ -96,9 +115,14 @@ class ConferenceAmendmentController extends Controller {
                 $isAdmin = true;
             }
         }
-
         if(Auth::user()->name == "admin")$isAdmin = true;
 
+
+        if(!$isAdmin){
+            foreach($amendments as $i=>$amendment){
+                if($amendment->accept!="true")unset($amendments[$i]);
+            }
+        }
         return view('app.conference.amendment.home')
             ->with("conf_id", $conferenceID)
             ->with("admin",$isAdmin)

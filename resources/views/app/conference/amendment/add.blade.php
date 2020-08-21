@@ -8,20 +8,27 @@
                     <div class="card-header">{{ __('Add Amendment') }}</div>
                     @if ( $page == "before")
                         <div class="card-body">
-                            Add Amendment
-                            <hr>
                             <form method="POST" action="{{route('app.conference.action.amendment.add',$conf_id)}}">
                                 @csrf
-                                <label for="title">title</label>
-                                <input id="title" type="text" name="title"><br>
-                                <textarea name="article"></textarea>
-                                <label for="title"></label>
-                                <select id="method" name="method">
-                                    <option>strike</option>
-                                    <option>add</option>
-                                    <option>modify</option>
-                                </select>
-                                <input type="submit" id="btn_submit" class="btn btn-info">
+                                <div class="form-group">
+                                    <label for="title">Amendment Title</label>
+                                    <input id="title" class="form-control" type="text" name="title">
+                                    <small id="titleHelp" class="form-text text-muted">The amendment title</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="article">Amendment Content</label>
+                                    <textarea name="article" class="form-control" id="article" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="method">Amendment Method</label>
+                                    <select id="method" name="method" id="method" class="form-control">
+                                        <option>strike</option>
+                                        <option>add</option>
+                                        <option>modify</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" id="btn_submit" class="form-control btn btn-outline-primary">Submit Amendment</button>
                             </form>
                         </div>
                     @else
@@ -29,6 +36,7 @@
                             Added Amendment<br>
                             {{$status}}
                             {{$title}}
+                            <a href="" ></a>
                         </div>
                     @endif
                 </div>

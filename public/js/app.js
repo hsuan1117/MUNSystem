@@ -1982,6 +1982,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         //console.table(res.data)
         console.log("Saved Update");
+        alert(res.data.msg);
         location.reload();
       })["catch"](function (error) {
         console.error(error);

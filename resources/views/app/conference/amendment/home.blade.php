@@ -16,20 +16,20 @@
                                         endpoint="{{route('app.conference.action.amendment.change',$conf_id)}}"
                                         accept-endpoint="{{route('app.conference.action.amendment.accept',$conf_id)}}"
                                         amendment="{{$amendment}}"
-                                        admin="true"
+                                        :admin="true"
                                     ></amendment>
-                                @elseauth
+                                @else
                                     <amendment
                                         endpoint="{{route('app.conference.action.amendment.change',$conf_id)}}"
                                         accept-endpoint="{{route('app.conference.action.amendment.accept',$conf_id)}}"
                                         amendment="{{$amendment}}"
-                                        admin="false"
+                                        :admin="false"
                                     ></amendment>
-                                @endauth
+                                @endif
                             @endforeach
                         </ol>
-                        <a href="{{route('app.conference.amendment.add',$conf_id)}}" class="btn btn-primary">Add
-                            Amendment</a>
+                        <br>
+                        <a href="{{route('app.conference.amendment.add',$conf_id)}}" class="btn btn-primary w-100">Add Amendment</a>
                     </div>
                 </div>
             </div>
