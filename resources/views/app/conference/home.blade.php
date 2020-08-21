@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         Welcome to SweetMUN !!!<br>
-                        @if (count($userData->conferences) == 0)
+                        @if (count($confData) == 0)
                             <div class="alert alert-danger">
                                 You don't have any conference!
                             </div>

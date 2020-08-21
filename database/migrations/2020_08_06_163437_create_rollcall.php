@@ -15,7 +15,7 @@ class CreateRollcall extends Migration
     {
         Schema::create('roll_calls', function (Blueprint $table) {
             $table->integer('id');
-            $table->string('role')->unique();
+            $table->string('role');
             $table->string('status');
             $table->timestamps();
         });
