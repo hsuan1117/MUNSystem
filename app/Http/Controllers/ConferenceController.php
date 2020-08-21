@@ -23,31 +23,55 @@ class ConferenceController extends Controller
     public function addConference(Request $request)
     {
         $confTitle = $request->input("title");
-        try {
-            DB::beginTransaction();
-            $id = DB::table("conferences")->insertGetId([
-                'title' => $confTitle
+        $confPWD   = $request->input("password");
+        $id = Conference::insertGetId([
+            'title' => $confTitle,
+            'password'=>$confPWD
+        ]);
+        $origin = User::where('id', Auth::id())
+            ->get()
+            ->first()
+            ->conferences;
+        array_push($origin,$id);
+        User::where('id', Auth::id())
+            ->update([
+                'conferences'=>$origin
             ]);
-            $origin = DB::table("users")
-                ->where('id', Auth::id())
-                ->get()
-                ->first()
-                ->conferences;
-            $origin = json_decode($origin,true);
-            array_push($origin,$id);
-            DB::table("users")
-                ->where('id', Auth::id())
-                ->update([
-                    'conferences'=>json_encode($origin)
-                ]);
-            DB::commit();
-        } catch (\PDOException $e) {
-            DB::rollBack();
-        }
         return view('app.conference.add')
             ->with("title",$confTitle)
             ->with("page","after")
             ->with("status","ok");
+    }
+
+    public function joinConference(Request $request)
+    {
+        $conferenceID = intval($request->input("conferenceID"));
+        $conferencePWD = $request->input("password");
+        $origin = User::where("id",Auth::id())->first()->conferences;
+        $conf = Conference::where("id",$conferenceID)->first();
+        if(!is_null($conf->password)){
+            if($conferencePWD === $conf->password){
+                array_push($origin,$conferenceID);
+                User::where("id",Auth::id())->update([
+                    'conferences'=>array_unique($origin)
+                ]);
+            }else{
+                return view('app.conference.join')
+                    ->with("msg","Fail to join ")
+                    ->with("page","after")
+                    ->with("status","fail");
+            }
+        }else{
+            array_push($origin,$conferenceID);
+            User::where("id",Auth::id())->update([
+                'conferences'=>array_unique($origin)
+            ]);
+        }
+        return view('app.conference.join')
+            ->with("msg","Success!!")
+            ->with("page","after")
+            ->with("status","ok");
+
     }
 
     public function showConference($conferenceID)
@@ -85,6 +109,14 @@ class ConferenceController extends Controller
             ->with("page","before");
     }
 
+    public function joinConferenceUI()
+    {
+        $maxID = count(Conference::all());
+        return view('app.conference.join')
+            ->with("maxID",$maxID)
+            ->with("page","before");
+    }
+
     //目錄
     public function home()
     {
@@ -94,6 +126,7 @@ class ConferenceController extends Controller
             $conf = Conference::all();
             $confData = array();
             foreach($conf as $_conf){
+                var_dump($_conf);
                 $confData[$_conf->id]=$_conf->title;
             }
         }else{

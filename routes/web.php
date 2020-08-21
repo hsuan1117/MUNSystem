@@ -25,6 +25,7 @@ Route::get('/manage', 'ManageController@home')->name('manage.home');
 Route::get('/app', 'AppController@home')->name('app.home');
 Route::get('/app/conference', 'ConferenceController@home')->name('app.conference.home');
 Route::get('/app/conference/add', 'ConferenceController@addConferenceUI')->name('app.conference.add');
+Route::get('/app/conference/join', 'ConferenceController@joinConferenceUI')->name('app.conference.join');
 Route::get('/app/conference/{conferenceID}', 'ConferenceController@showConference')->name('app.conference.conference');
 Route::get('/app/conference/{conferenceID}/step', 'ConferenceController@getStep')->name('app.conference.action.getStep');
 Route::get('/app/conference/{conferenceID}/speaking', 'ConferenceController@getSpeaking')->name('app.conference.action.getSpeaking');
@@ -36,6 +37,7 @@ Route::get('/app/conference/{conferenceID}/amendment', 'ConferenceAmendmentContr
 Route::get('/app/conference/{conferenceID}/amendment/add', 'ConferenceAmendmentController@addUI')->name('app.conference.amendment.add');
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');
+Route::post('/app/conference/join', 'ConferenceController@joinConference')->name('app.conference.action.join');
 Route::post('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRole')->name('app.conference.action.role.add');
 Route::post('/app/conference/{conferenceID}/rollCall/change', 'ConferenceRollCallController@change')->name('app.conference.action.roleCall.change');
 Route::post('/app/conference/{conferenceID}/openingSpeech/change', 'ConferenceOpeningSpeechController@change')->name('app.conference.action.openingSpeech.change');

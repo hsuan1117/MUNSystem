@@ -35,7 +35,8 @@
                         <br>
                         <div class="btn-group-vertical w-100">
                             <a href="{{route('app.conference.add')}}" class="btn btn-primary">Add Conference</a>
-                            <a href="{{route('app.conference.add')}}" class="btn btn-info disabled">Join Conference</a>
+                            <br>
+                            <a href="{{route('app.conference.join')}}" class="btn btn-info ">Join Conference</a>
                         </div>
                     </div>
                 </div>
