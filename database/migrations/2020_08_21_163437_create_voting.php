@@ -16,6 +16,7 @@ class CreateVoting extends Migration
         Schema::create('votings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('conf_id');
+            $table->integer('vote_id');
             $table->string('role');
             $table->string('voting');
             $table->timestamps();
@@ -29,6 +30,6 @@ class CreateVoting extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roll_calls');
+        Schema::dropIfExists('votings');
     }
 }

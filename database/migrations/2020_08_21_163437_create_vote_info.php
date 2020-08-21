@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNote extends Migration
+class CreateVoteInfo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateNote extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('conf_id');
-            $table->string('role');
+        Schema::create('vote_info', function (Blueprint $table) {
+            $table->integer('id');
             $table->string('title');
-            $table->string('accept')->nullable();
-            $table->string('recipient');
-            $table->longText('article')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateNote extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('vote_info');
     }
 }

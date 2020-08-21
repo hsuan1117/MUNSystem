@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'test',
             'step' => 'RollCall',
             'password' => '123456',
+            'votes'=>json_encode([])
         ]);
     }
 }

@@ -18,6 +18,7 @@ class CreateConferences extends Migration
             $table->string('title')->unique();
             $table->string('step')->default("RollCall");
             $table->string('speechRole')->nullable();
+            $table->json('votes');
             $table->string('password')->nullable();
             $table->timestamps();
         });

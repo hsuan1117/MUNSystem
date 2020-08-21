@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\VoteInfo;
 use Illuminate\Http\Request;
 use App\User;
 use App\Conference;
@@ -31,15 +32,17 @@ class ConferenceVotingController extends Controller {
     }
 
     //目錄
-    public function home($conferenceID) {
+    public function listVote($conferenceID,$voteID) {
         $roles = Participant::where("id", $conferenceID)->get() ?? [];
-        $rolls = RollCall::where("id", $conferenceID)->get() ?? [];
+        $votes = Voting::where("conf_id", $conferenceID)
+                ->where('vote_id',$voteID)
+                ->get() ?? [];
         $newRoles = [];
-        $newRolls = [];
-        $rollsCnt = [
-          "PV"=>0,
-          "P"=>0,
-          "A"=>0
+        $newVotes = [];
+        $votesCnt = [
+            "Yes"=>0,
+            "No"=>0,
+            "Abstain"=>0
         ];
         foreach ($roles as $role) {
             if (isset($newRoles[$role->role])) {
@@ -48,14 +51,43 @@ class ConferenceVotingController extends Controller {
                 $newRoles[$role->role] = [$role->account];
             }
         }
-        foreach ($rolls as $status) {
-            $rollsCnt[$status->status]++;
-            $newRolls[$status->role] = $status->status;
+        foreach ($votes as $vote) {
+            $votesCnt[$vote->voting]++;
+            $newVotes[$vote->role] = $vote->voting;
         }
         return view('app.conference.rollCall.home')
             ->with('conf_id', $conferenceID)
             ->with('roles', $newRoles)
-            ->with('rollCalls', $newRolls)
-            ->with('rollCallsCount', $rollsCnt);
+            ->with('votes', $newVotes)
+            ->with('votesCount', $votesCnt);
+    }
+    //TODO: MUST Implement Voting Page
+    //目錄
+    public function home($conferenceID) {
+        $roles = Participant::where("id", $conferenceID)->get() ?? [];
+        $vote_info = VoteInfo::all() ?? [];
+        $votes = Conference::where("id", $conferenceID)->first();
+
+        $newRoles = [];
+        $newInfos = [];
+        foreach ($roles as $role) {
+            if (isset($newRoles[$role->role])) {
+                array_push($newRoles[$role->role], $role->account);
+            } else {
+                $newRoles[$role->role] = [$role->account];
+            }
+        }
+        foreach ($vote_info as $info) {
+            $newInfos[$info->id] = $info->title;
+        }
+        if(!is_null($votes)){
+            $votes = $votes->votes;
+        }
+        $votes = $votes ?? [];
+        return view('app.conference.voting.home')
+            ->with('conf_id', $conferenceID)
+            ->with('roles', $newRoles)
+            ->with('votes', $votes)
+            ->with('infos', $newInfos);
     }
 }
