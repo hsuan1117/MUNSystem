@@ -9,12 +9,18 @@
 
                     <div class="card-body">
                         <current-step endpoint="{{route('app.conference.action.getStep',$conf_id)}}"></current-step>
-                        {{gettype($conf_data)}}<br>
-                        <a href="{{route('app.conference.role.home',$conf_id)}}" class="btn btn-primary">Conference Roles (Countries)</a>
-                        <a href="{{route('app.conference.roleCall.home',$conf_id)}}" class="btn btn-primary">Roll Call</a>
-                        <a href="{{route('app.conference.openingSpeech.home',$conf_id)}}" class="btn btn-primary">Opening Speech</a><br>
-                        <a href="{{route('app.conference.amendment.home',$conf_id)}}" class="btn btn-primary">Amendment</a>
-                        <a href="{{route('app.conference.note.home',$conf_id)}}" class="btn btn-primary">Note</a>
+                        <!--{{gettype($conf_data)}}<br>-->
+                        <div class="container">
+                            <div class="list-group">
+                                <a href="{{route('app.conference.role.home',$conf_id)}}" class="list-group-item list-group-item-action">Conference Roles (Countries)</a>
+                                <a href="{{route('app.conference.roleCall.home',$conf_id)}}" class="list-group-item list-group-item-action">Roll Call</a>
+                                <a href="{{route('app.conference.openingSpeech.home',$conf_id)}}" class="list-group-item list-group-item-action">Opening Speech</a>
+                                <a href="{{route('app.conference.amendment.home',$conf_id)}}" class="list-group-item list-group-item-action">Amendment</a>
+                                <a href="{{route('app.conference.note.home',$conf_id)}}" class="list-group-item list-group-item-action">Note</a>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
