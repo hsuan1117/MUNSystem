@@ -35,6 +35,8 @@ Route::get('/app/conference/{conferenceID}/rollCall', 'ConferenceRollCallControl
 Route::get('/app/conference/{conferenceID}/openingSpeech', 'ConferenceOpeningSpeechController@home')->name('app.conference.openingSpeech.home');
 Route::get('/app/conference/{conferenceID}/amendment', 'ConferenceAmendmentController@home')->name('app.conference.amendment.home');
 Route::get('/app/conference/{conferenceID}/amendment/add', 'ConferenceAmendmentController@addUI')->name('app.conference.amendment.add');
+Route::get('/app/conference/{conferenceID}/note', 'ConferenceNoteController@home')->name('app.conference.note.home');
+Route::get('/app/conference/{conferenceID}/note/add', 'ConferenceNoteController@addUI')->name('app.conference.note.add');
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');
 Route::post('/app/conference/join', 'ConferenceController@joinConference')->name('app.conference.action.join');
@@ -45,3 +47,6 @@ Route::post('/app/conference/{conferenceID}/openingSpeech/startSpeech', 'Confere
 Route::post('/app/conference/{conferenceID}/amendment/change', 'ConferenceAmendmentController@change')->name('app.conference.action.amendment.change');
 Route::post('/app/conference/{conferenceID}/amendment/accept', 'ConferenceAmendmentController@accept')->name('app.conference.action.amendment.accept');
 Route::post('/app/conference/{conferenceID}/amendment/add', 'ConferenceAmendmentController@add')->name('app.conference.action.amendment.add');
+Route::post('/app/conference/{conferenceID}/note/change', 'ConferenceNoteController@change')->name('app.conference.action.note.change');
+Route::post('/app/conference/{conferenceID}/note/accept', 'ConferenceNoteController@accept')->name('app.conference.action.note.accept');
+Route::post('/app/conference/{conferenceID}/note/add', 'ConferenceNoteController@add')->name('app.conference.action.note.add');

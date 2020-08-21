@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Amendment extends Model
+class Note extends Model
 {
-    protected $table = 'amendments';
+    protected $table = 'notes';
     protected $primaryKey = 'id';
     protected $fillable = [
         'conf_id',
         'role',
+        'recipient',
         'article',
         'title',
-        'accept',
-        'method'
+        'accept'
     ];
     /* Accept:
      *  true
