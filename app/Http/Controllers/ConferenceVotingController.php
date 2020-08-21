@@ -9,6 +9,7 @@ use App\Participant;
 use App\RollCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Voting;
 
 class ConferenceVotingController extends Controller {
     public function __construct() {
@@ -17,15 +18,15 @@ class ConferenceVotingController extends Controller {
 
     public function change(Request $request, $conferenceID) {
         $role = $request->input('role');
-        $status = $request->input('status');
-        RollCall::where("id", $conferenceID)
+        $voting = $request->input('voting');
+        Voting::where("id", $conferenceID)
             ->where('role', $role)
             ->update([
-                'status' => $status
+                'voting' => $voting
             ]);
         return response()->json([
             'role' => $role,
-            'status' => $status,
+            'voting' => $voting,
         ]);
     }
 
