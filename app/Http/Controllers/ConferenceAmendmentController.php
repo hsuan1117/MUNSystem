@@ -19,29 +19,30 @@ class ConferenceAmendmentController extends Controller {
 
     public function add(Request $request, $conferenceID) {
         $role = Participant::where("id", $conferenceID)
-            ->where("account", Auth::user()->getAuthIdentifier())
+            ->where("account", Auth::id())
             ->first()
             ->role;
         $title = $request->input('title');
         $article = $request->input('article');
-
+        $method = $request->input('method');
         Amendment::insert([
-            "article" => $article,
-            "role"=>$role,
-            "conf_id" => $conferenceID,
-            "title" => $title,
-            'accept' => "pending"
+            'article' => $article,
+            'role' => $role,
+            'conf_id' => $conferenceID,
+            'title' => $title,
+            'accept' => "pending",
+            'method' => $method
         ]);
         return view("app.conference.amendment.add")
             ->with("page", "after")
-            ->with("title",$title)
-            ->with("status","ok");
+            ->with("title", $title)
+            ->with("status", "ok");
     }
 
     public function addUI($conferenceID) {
         return view("app.conference.amendment.add")
             ->with("page", "before")
-            ->with("conf_id",$conferenceID);
+            ->with("conf_id", $conferenceID);
     }
 
     public function accept(Request $request, $conferenceID) {
@@ -86,8 +87,21 @@ class ConferenceAmendmentController extends Controller {
             "article"=>"default",
             "accept"=>"pending"
         ]);*/
+        $isAdmin  = false;
+        $userData = Participant::where("id",$conferenceID)
+            ->where("account",Auth::id())
+            ->first();
+        if(!is_null($userData)){
+            if($userData->role == "chair"){
+                $isAdmin = true;
+            }
+        }
+
+        if(Auth::user()->name == "admin")$isAdmin = true;
+
         return view('app.conference.amendment.home')
             ->with("conf_id", $conferenceID)
+            ->with("admin",$isAdmin)
             ->with("amendments", $amendments);
     }
 }

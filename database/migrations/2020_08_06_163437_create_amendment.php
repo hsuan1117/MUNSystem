@@ -19,6 +19,7 @@ class CreateAmendment extends Migration
             $table->string('role');
             $table->string('title');
             $table->string('accept')->nullable();
+            $table->string('method')->default("modify");
             $table->longText('article')->nullable();
             $table->timestamps();
         });

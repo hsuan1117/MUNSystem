@@ -12,7 +12,8 @@ class Amendment extends Model
         'role',
         'article',
         'title',
-        'accept'
+        'accept',
+        'method'
     ];
     /* Accept:
      *  true

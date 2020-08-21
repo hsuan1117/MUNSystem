@@ -16,7 +16,7 @@ class CreateParticipants extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->integer('id');
             $table->string('role');
-            $table->string('account');
+            $table->integer('account');
             $table->timestamps();
         });
     }

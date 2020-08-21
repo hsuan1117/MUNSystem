@@ -13,8 +13,14 @@
                             <form method="POST" action="{{route('app.conference.action.amendment.add',$conf_id)}}">
                                 @csrf
                                 <label for="title">title</label>
-                                <input id="title" type="text" name="title">
+                                <input id="title" type="text" name="title"><br>
                                 <textarea name="article"></textarea>
+                                <label for="title"></label>
+                                <select id="method" name="method">
+                                    <option>strike</option>
+                                    <option>add</option>
+                                    <option>modify</option>
+                                </select>
                                 <input type="submit" id="btn_submit" class="btn btn-info">
                             </form>
                         </div>

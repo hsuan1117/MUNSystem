@@ -1949,9 +1949,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "amendment",
-  props: ['endpoint', 'accept-endpoint', 'amendment'],
+  props: ['endpoint', 'accept-endpoint', 'amendment', 'admin'],
   mounted: function mounted() {
     this.amendment = JSON.parse(this.amendment); //window.alert(this.amendment.role)
   },
@@ -37859,6 +37865,22 @@ var render = function() {
             _vm._s(_vm.amendment.id) +
             ")\n        "
         ),
+        _vm.amendment.method === "add"
+          ? _c("span", { staticClass: "badge badge-success" }, [_vm._v("Add")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.amendment.method === "modify"
+          ? _c("span", { staticClass: "badge badge-primary" }, [
+              _vm._v("Modify")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.amendment.method === "strike"
+          ? _c("span", { staticClass: "badge badge-danger" }, [
+              _vm._v("Strike")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _vm.amendment.accept === "true"
           ? _c("i", {
               staticClass: "fa fa-check-circle text-success",
@@ -37915,80 +37937,82 @@ var render = function() {
             [_vm._v(_vm._s(_vm.amendment.article))]
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "btn-group w-100", attrs: { role: "group" } },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  attrs: { type: "button", "data-status": "true" },
-                  on: {
-                    click: function($event) {
-                      return _vm.accept($event)
-                    }
-                  }
-                },
+          _vm.admin
+            ? _c(
+                "div",
+                { staticClass: "btn-group w-100", attrs: { role: "group" } },
                 [
-                  _c("i", {
-                    staticClass: "fa fa-check-circle ",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      "data-placement": "top",
-                      title: "Verified Amendment"
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  attrs: { type: "button", "data-status": "false" },
-                  on: {
-                    click: function($event) {
-                      return _vm.accept($event)
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-times-circle ",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      "data-placement": "top",
-                      title: "Rejected Amendment"
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-info",
-                  attrs: { type: "button", "data-status": "pending" },
-                  on: {
-                    click: function($event) {
-                      return _vm.accept($event)
-                    }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-question-circle ",
-                    attrs: {
-                      "data-toggle": "tooltip",
-                      "data-placement": "top",
-                      title: "Pending Amendment"
-                    }
-                  })
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "button", "data-status": "true" },
+                      on: {
+                        click: function($event) {
+                          return _vm.accept($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-check-circle ",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "Verified Amendment"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button", "data-status": "false" },
+                      on: {
+                        click: function($event) {
+                          return _vm.accept($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-times-circle ",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "Rejected Amendment"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: { type: "button", "data-status": "pending" },
+                      on: {
+                        click: function($event) {
+                          return _vm.accept($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-question-circle ",
+                        attrs: {
+                          "data-toggle": "tooltip",
+                          "data-placement": "top",
+                          title: "Pending Amendment"
+                        }
+                      })
+                    ]
+                  )
                 ]
               )
-            ]
-          )
+            : _vm._e()
         ])
       ]
     )
