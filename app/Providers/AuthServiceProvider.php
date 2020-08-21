@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Participant;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -24,6 +26,20 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        //
+        Gate::define('is-admin', function ($user,$conf_id) {
+            $isAdmin = false;
+            if(!is_null($conf_id)){
+                $userData = Participant::where("id",$conf_id)
+                    ->where("account",Auth::id())
+                    ->first();
+                if(!is_null($userData)){
+                    if($userData->role == "chair"){
+                        $isAdmin = true;
+                    }
+                }
+            }
+            if($user->name == "admin")$isAdmin = true;
+            return $isAdmin;
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Amendment;
+use Illuminate\Support\Facades\Gate;
 use Session;
 use Illuminate\Http\Request;
 use App\User;
@@ -49,17 +50,7 @@ class ConferenceAmendmentController extends Controller {
         //$role = $request->input('role');
         $status = $request->input("status");
         $id = $request->input('id');
-        $isAdmin  = false;
-        $userData = Participant::where("id",$conferenceID)
-            ->where("account",Auth::id())
-            ->first();
-        if(!is_null($userData)){
-            if($userData->role == "chair"){
-                $isAdmin = true;
-            }
-        }
-        if(Auth::user()->name == "admin")$isAdmin = true;
-        if($isAdmin){
+        if (Gate::check('is-admin',[$conferenceID])) {
             Amendment::where('id', $id)
                 ->updateOrInsert([
                     'id' => $id
@@ -106,26 +97,14 @@ class ConferenceAmendmentController extends Controller {
             "article"=>"default",
             "accept"=>"pending"
         ]);*/
-        $isAdmin  = false;
-        $userData = Participant::where("id",$conferenceID)
-            ->where("account",Auth::id())
-            ->first();
-        if(!is_null($userData)){
-            if($userData->role == "chair"){
-                $isAdmin = true;
-            }
-        }
-        if(Auth::user()->name == "admin")$isAdmin = true;
-
-
-        if(!$isAdmin){
+        if (!Gate::check('is-admin',[$conferenceID])) {
             foreach($amendments as $i=>$amendment){
                 if($amendment->accept!="true")unset($amendments[$i]);
             }
         }
         return view('app.conference.amendment.home')
             ->with("conf_id", $conferenceID)
-            ->with("admin",$isAdmin)
+            ->with("admin",Gate::check('is-admin',[$conferenceID]))
             ->with("amendments", $amendments);
     }
 }

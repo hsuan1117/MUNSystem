@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Amendment;
+use Illuminate\Support\Facades\Gate;
 use Session;
 use Illuminate\Http\Request;
 use App\User;
@@ -86,16 +88,25 @@ class ConferenceController extends Controller
     //目錄
     public function home()
     {
-        // User [name,level,conferences]
-        $currUser = User::where("id",Auth::id())->first();
+        if (Gate::check('is-admin',[null])) {
+            $currUser = User::where("id",Auth::id())->first();
 
-        // Conference (Only for conference in user)
-        //   [title]
-        $confData = array();
-        foreach($currUser->conferences as $conf){
-            $confData[$conf]=Conference::where("id",$conf)->first()->title;
+            $conf = Conference::all();
+            $confData = array();
+            foreach($conf as $_conf){
+                $confData[$_conf->id]=$_conf->title;
+            }
+        }else{
+            // User [name,level,conferences]
+            $currUser = User::where("id",Auth::id())->first();
+
+            // Conference (Only for conference in user)
+            //   [title]
+            $confData = array();
+            foreach($currUser->conferences as $conf){
+                $confData[$conf]=Conference::where("id",$conf)->first()->title;
+            }
         }
-
         return view('app.conference.home')
             ->with("userData",$currUser)
             ->with("confData",$confData);
