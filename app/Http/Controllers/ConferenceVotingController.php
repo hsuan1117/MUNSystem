@@ -11,6 +11,7 @@ use App\RollCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Voting;
+use Illuminate\Support\Facades\Gate;
 
 class ConferenceVotingController extends Controller {
     public function __construct() {
@@ -31,8 +32,33 @@ class ConferenceVotingController extends Controller {
         ]);
     }
 
-    //目錄
-    public function listVote($conferenceID,$voteID) {
+    public function add(Request $request, $conferenceID) {
+        $title = $request->input('title');
+
+        $voteID = VoteInfo::insertGetId([
+            #'conf_id' => $conferenceID,
+            'title' => $title
+        ]);
+        $conf = Conference::where("id", $conferenceID)->first()->votes ?? [];
+        array_push($conf,$voteID);
+        Conference::where("id", $conferenceID)->first()
+            ->update([
+                'votes'=>$conf
+            ]);
+
+        return view("app.conference.voting.add")
+            ->with("page", "after")
+            ->with("title", $title)
+            ->with("status", "ok");
+    }
+
+    public function addUI($conferenceID) {
+        return view("app.conference.voting.add")
+            ->with("page", "before")
+            ->with("conf_id", $conferenceID);
+    }
+
+    public function voting($conferenceID,$voteID) {
         $roles = Participant::where("id", $conferenceID)->get() ?? [];
         $votes = Voting::where("conf_id", $conferenceID)
                 ->where('vote_id',$voteID)
@@ -44,6 +70,7 @@ class ConferenceVotingController extends Controller {
             "No"=>0,
             "Abstain"=>0
         ];
+        $admin = Gate::check('is-admin',[$conferenceID]);
         foreach ($roles as $role) {
             if (isset($newRoles[$role->role])) {
                 array_push($newRoles[$role->role], $role->account);
@@ -55,12 +82,14 @@ class ConferenceVotingController extends Controller {
             $votesCnt[$vote->voting]++;
             $newVotes[$vote->role] = $vote->voting;
         }
-        return view('app.conference.rollCall.home')
+        return view('app.conference.voting.voting')
             ->with('conf_id', $conferenceID)
             ->with('roles', $newRoles)
             ->with('votes', $newVotes)
-            ->with('votesCount', $votesCnt);
+            ->with('votesCount', $votesCnt)
+            ->with('admin',$admin);
     }
+
     //TODO: MUST Implement Voting Page
     //目錄
     public function home($conferenceID) {

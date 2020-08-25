@@ -14,7 +14,7 @@ class CreateVoteInfo extends Migration
     public function up()
     {
         Schema::create('vote_info', function (Blueprint $table) {
-            $table->integer('id');
+            $table->increments('id');
             $table->string('title');
             $table->timestamps();
         });
