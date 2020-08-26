@@ -5,7 +5,7 @@
         >
             {{ vote.role }} (ID: {{vote.id}})
         </li>
-        <div class="collapse " :id="'collapse_role_'+vote.id">
+        <div class="collapse show" :id="'collapse_role_'+vote.id">
             <div class="btn-group d-flex" v-if="vote.voting === 'Yes'">
                 <button type="button" class="RC btn btn-success w-100" @click="onClick($event)">Yes</button>
                 <button type="button" class="RC btn btn-default w-100" @click="onClick($event)">No</button>
@@ -39,7 +39,7 @@ export default {
             var that = this
             axios.post(that.endpoint, {
                 'voting': e.currentTarget.innerText,
-                'role': that.role
+                'role': that.vote.role
             }).then((res) => {
                 console.table(res.data)
                 location.reload()

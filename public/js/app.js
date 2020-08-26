@@ -2440,7 +2440,7 @@ __webpack_require__.r(__webpack_exports__);
       var that = this;
       axios.post(that.endpoint, {
         'voting': e.currentTarget.innerText,
-        'role': that.role
+        'role': that.vote.role
       }).then(function (res) {
         console.table(res.data);
         location.reload();
@@ -38757,7 +38757,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "collapse ",
+        staticClass: "collapse show",
         attrs: { id: "collapse_role_" + _vm.vote.id }
       },
       [

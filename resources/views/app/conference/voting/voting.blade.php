@@ -20,18 +20,17 @@
                                 @if($admin)
                                     <voting
                                         endpoint="{{route('app.conference.action.voting.change',$conf_id)}}"
-                                        vote="{{$votes[$account]}}"
+                                        vote="{{$votes[$role]}}"
                                         :admin="true"
                                     ></voting>
                                 @else
                                     <voting
                                         endpoint="{{route('app.conference.action.voting.change',$conf_id)}}"
-                                        vote="{{$votes[$account]}}"
+                                        vote="{{$votes[$role]}}"
                                         :admin="false"
                                     ></voting>
                                 @endif
                             @endforeach
-
                         </ol>
                     <!--<div class="btn-group-vertical w-100">
                             <a href="{{route('app.conference.add')}}" class="btn btn-primary">Add Conference</a>

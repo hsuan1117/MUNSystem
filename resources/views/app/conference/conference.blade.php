@@ -17,6 +17,7 @@
                                 <a href="{{route('app.conference.openingSpeech.home',$conf_id)}}" class="list-group-item list-group-item-action">Opening Speech</a>
                                 <a href="{{route('app.conference.amendment.home',$conf_id)}}" class="list-group-item list-group-item-action">Amendment</a>
                                 <a href="{{route('app.conference.note.home',$conf_id)}}" class="list-group-item list-group-item-action">Note</a>
+                                <a href="{{route('app.conference.voting.home',$conf_id)}}" class="list-group-item list-group-item-action">Vote</a>
                             </div>
 
                         </div>

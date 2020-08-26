@@ -27,6 +27,7 @@
                             @endforeach
 
                         </ol>
+                        <a href="{{route('app.conference.voting.add',$conf_id)}}" class="btn btn-primary">Add Vote</a>
                     </div>
                 </div>
             </div>

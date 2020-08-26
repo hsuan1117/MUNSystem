@@ -8,15 +8,18 @@
                     <div class="card-header">{{ __('Add Role') }}</div>
                     @if ( $page == "before")
                         <div class="card-body">
-                            Add Role
-                            <hr>
                             <form method="POST" action="{{route('app.conference.action.role.add',$conf_id)}}">
                                 @csrf
-                                <label for="role">role</label>
-                                <input id="role" type="text" name="role"><br>
-                                <label for="id">user id</label>
-                                <input id="id" type="text" name="id"><br>
-                                <input type="submit" id="btn_submit" class="btn btn-info">
+                                <div class="form-group">
+                                    <label for="role">Country Name (Role)</label>
+                                    <input id="role" class="form-control" type="text" name="role">
+                                    <small id="roleHelp" class="form-text text-muted">The country name</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id">User ID</label>
+                                    <input id="id" class="form-control" type="number" max="{{$maxID}}" name="id">
+                                </div>
+                                <button type="submit" class="form-control btn btn-outline-primary" id="btn_submit" class="btn btn-info">Submit</button>
                             </form>
                         </div>
                     @else

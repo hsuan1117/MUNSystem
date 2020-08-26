@@ -18,8 +18,10 @@ class ConferenceRoleController extends Controller
     }
     public function addRoleUI($conferenceID)
     {
+        $maxID = count(User::all());
         return view('app.conference.role.add')
             ->with("page","before")
+            ->with("maxID",$maxID)
             ->with("conf_id",$conferenceID);
     }
 
@@ -48,6 +50,7 @@ class ConferenceRoleController extends Controller
                 'role'=>$roleName,
                 'article' => "default"
             ]);
+
         return view('app.conference.role.add')
             ->with("role",$roleName)
             ->with("id",$userId)

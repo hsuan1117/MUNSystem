@@ -23,7 +23,10 @@ class ConferenceVotingController extends Controller {
         $voting = $request->input('voting');
         Voting::where("id", $conferenceID)
             ->where('role', $role)
-            ->update([
+            ->updateOrInsert([
+                'id'=>$conferenceID,
+                'role'=>$role
+            ],[
                 'voting' => $voting
             ]);
         return response()->json([
@@ -45,6 +48,27 @@ class ConferenceVotingController extends Controller {
             ->update([
                 'votes'=>$conf
             ]);
+
+        $roles = Participant::where("id", $conferenceID)->get() ?? [];
+
+        $admin = Gate::check('is-admin',[$conferenceID]);
+        foreach ($roles as $role) {
+            Voting::where("conf_id", $conferenceID)
+                ->where('vote_id',$voteID)
+                ->where('role',$role->role)
+                ->firstOrCreate([
+                    "conf_id"=>$conferenceID,
+                    'vote_id'=>$voteID,
+                    'role'=>$role->role
+                ],[
+                    "conf_id"=>$conferenceID,
+                    'vote_id'=>$voteID,
+                    'role'=>$role->role,
+                    'voting'=>'Yes'
+                ]);
+        }
+
+
 
         return view("app.conference.voting.add")
             ->with("page", "after")
@@ -78,9 +102,9 @@ class ConferenceVotingController extends Controller {
                 $newRoles[$role->role] = [$role->account];
             }
         }
-        foreach ($votes as $vote) {
+        foreach ($votes as $vote){
             $votesCnt[$vote->voting]++;
-            $newVotes[$vote->role] = $vote->voting;
+            $newVotes[$vote->role] = $vote;
         }
         return view('app.conference.voting.voting')
             ->with('conf_id', $conferenceID)
