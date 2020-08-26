@@ -26,7 +26,8 @@ class ConferenceController extends Controller
         $confPWD   = $request->input("password");
         $id = Conference::insertGetId([
             'title' => $confTitle,
-            'password'=>$confPWD
+            'password'=>$confPWD,
+            'votes'=>json_encode([])
         ]);
         $origin = User::where('id', Auth::id())
             ->get()
