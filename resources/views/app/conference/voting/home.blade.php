@@ -19,7 +19,6 @@
                                 <div class="collapse" id="collapse_conference_{{$vote}}">
                                     <div> ID: {{$vote}}</div>
                                     <div>
-                                        <!--TODO: MUST Implement Voting Page-->
                                         <a href="{{route('app.conference.voting.voting',[$conf_id,$vote])}}"
                                            class="btn btn-sm btn-success ">Voting Page</a>
                                     </div>

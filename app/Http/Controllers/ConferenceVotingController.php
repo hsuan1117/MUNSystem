@@ -113,8 +113,6 @@ class ConferenceVotingController extends Controller {
             ->with('votesCount', $votesCnt)
             ->with('admin',$admin);
     }
-
-    //TODO: MUST Implement Voting Page
     //目錄
     public function home($conferenceID) {
         $roles = Participant::where("id", $conferenceID)->get() ?? [];
