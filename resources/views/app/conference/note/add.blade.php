@@ -24,7 +24,7 @@
                                     <input id="recipient" class="form-control" type="text" name="recipient">
                                 </div>
 
-                                <button type="submit" id="btn_submit" class="form-control btn btn-outline-primary">Submit Amendment</button>
+                                <button type="submit" id="btn_submit" class="form-control btn btn-outline-primary">Submit Note</button>
                             </form>
                         </div>
                     @else
