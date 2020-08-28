@@ -47,7 +47,13 @@ export default {
                 'role': that.role
             }).then((res) => {
                 if(res.data.status === "fail"){
-                    alert("Fail, "+(res.data.msg??"unknown"))
+                    switch (res.data.msg){
+                        case "os/speaked":
+                            window.alert("Start Fail, you had speaked before.")
+                            break;
+                        default:
+                            window.alert("Start Fail, unknown issue.")
+                    }
                 }
 
             }).catch((error) => {
