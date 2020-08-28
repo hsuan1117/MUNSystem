@@ -28,7 +28,7 @@
 <script>
 export default {
     name: "voting",
-    props: ['endpoint','vote','admin'],
+    props: ['endpoint','vote','admin','id'],
     mounted() {
         this.vote = JSON.parse(this.vote);
         //window.alert(this.amendment.role)
@@ -39,7 +39,9 @@ export default {
             var that = this
             axios.post(that.endpoint, {
                 'voting': e.currentTarget.innerText,
-                'role': that.vote.role
+                //'vote_id':that.id,
+                'role': that.vote.role,
+                'id':that.vote.id
             }).then((res) => {
                 console.table(res.data)
                 location.reload()

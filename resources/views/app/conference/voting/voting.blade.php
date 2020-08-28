@@ -19,14 +19,16 @@
                             @foreach($roles as $role=>$account)
                                 @if($admin)
                                     <voting
-                                        endpoint="{{route('app.conference.action.voting.change',$conf_id)}}"
+                                        endpoint="{{route('app.conference.action.voting.change',[$conf_id,$vote_id])}}"
                                         vote="{{$votes[$role]}}"
+                                        id="{{$vote_id}}"
                                         :admin="true"
                                     ></voting>
                                 @else
                                     <voting
-                                        endpoint="{{route('app.conference.action.voting.change',$conf_id)}}"
+                                        endpoint="{{route('app.conference.action.voting.change',[$conf_id,$vote_id])}}"
                                         vote="{{$votes[$role]}}"
+                                        id="{{$vote_id}}"
                                         :admin="false"
                                     ></voting>
                                 @endif

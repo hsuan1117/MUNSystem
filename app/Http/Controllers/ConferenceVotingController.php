@@ -18,15 +18,17 @@ class ConferenceVotingController extends Controller {
         $this->middleware('auth');
     }
 
-    public function change(Request $request, $conferenceID) {
+    public function change(Request $request, $conferenceID, $voteID) {
         $role = $request->input('role');
+        $id = $request->input('id');
         $voting = $request->input('voting');
-        Voting::where("id", $conferenceID)
-            ->where('role', $role)
+        Voting::where("conf_id", $conferenceID)
             ->updateOrInsert([
-                'id'=>$conferenceID,
-                'role'=>$role
+                'id'=>$id
             ],[
+                'conf_id'=>$conferenceID,
+                'vote_id'=>$voteID,
+                'role'=>$role,
                 'voting' => $voting
             ]);
         return response()->json([
@@ -108,6 +110,7 @@ class ConferenceVotingController extends Controller {
         }
         return view('app.conference.voting.voting')
             ->with('conf_id', $conferenceID)
+            ->with('vote_id', $voteID)
             ->with('roles', $newRoles)
             ->with('votes', $newVotes)
             ->with('votesCount', $votesCnt)
