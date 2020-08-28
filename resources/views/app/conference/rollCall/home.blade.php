@@ -18,11 +18,11 @@
                             </li>
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                                    data-toggle="collapse" data-target="#collapse_role_{{$role}}"
+                                    data-toggle="collapse" data-target="#collapse_role_{{md5($role)}}"
                                 >
                                     {{$role}}
                                 </li>
-                                <div class="collapse show " id="collapse_role_{{$role}}">
+                                <div class="collapse show " id="collapse_role_{{md5($role)}}">
                                     <roll-call
                                         :endpoint="'{{route('app.conference.action.roleCall.change',$conf_id)}}'"
                                         :role="'{{$role}}'"

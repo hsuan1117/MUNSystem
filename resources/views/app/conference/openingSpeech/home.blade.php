@@ -15,11 +15,11 @@
                         <ol class="list-group">
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                                    data-toggle="collapse" data-target="#collapse_role_{{$role}}"
+                                    data-toggle="collapse" data-target="#collapse_role_{{md5($role)}}"
                                 >
                                     {{$role}} <span class="badge pull-right">{{strlen($speeches[$role]??'')}} words</span>
                                 </li>
-                                <div class="collapse " id="collapse_role_{{$role}}">
+                                <div class="collapse " id="collapse_role_{{md5($role)}}">
                                     <opening-speech
                                         endpoint="{{route('app.conference.action.openingSpeech.change',$conf_id)}}"
                                         start-endpoint="{{route('app.conference.action.openingSpeech.startSpeech',$conf_id)}}"
