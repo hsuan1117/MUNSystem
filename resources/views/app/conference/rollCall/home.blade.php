@@ -12,8 +12,8 @@
 
                         <ol class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center bg-success">
-                                <div>PV : {{$rollCallsCount["PV"]}}</div>
                                 <div>P : {{$rollCallsCount["P"]}}</div>
+                                <div>PV : {{$rollCallsCount["PV"]}}</div>
                                 <div>A : {{$rollCallsCount["A"]}}</div>
                             </li>
                             @foreach($roles as $role=>$account)
