@@ -1,7 +1,7 @@
 git stash
 git pull
-composer install --no-dev
-composer dump-autoload
+php composer.phar install --no-dev
+php composer.phar dump-autoload
 php artisan migrate
 php artisan config:clear
 php artisan config:cache

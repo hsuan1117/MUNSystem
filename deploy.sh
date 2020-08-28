@@ -1,5 +1,5 @@
-composer install --no-dev
-composer dump-autoload
+php composer.phar install --no-dev
+php composer.phar dump-autoload
 php artisan migrate:refresh --seed
 php artisan config:clear
 php artisan config:cache
