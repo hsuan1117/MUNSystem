@@ -11,7 +11,7 @@
                         Welcome to <b>{{Session::get('ConferenceName','Conference')}}</b> (ID: {{$conf_id}}) !!!<br>
 
                         <ol class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center bg-success">
+                            <li class="alert bg-info d-flex justify-content-between align-items-center bg-success">
                                 <div>Yes : {{$votesCount["Yes"]}}</div>
                                 <div>No  : {{$votesCount["No"]}}</div>
                                 <div>Abstain : {{$votesCount["Abstain"]}}</div>
@@ -20,14 +20,20 @@
                                 @if($admin)
                                     <voting
                                         endpoint="{{route('app.conference.action.voting.change',[$conf_id,$vote_id])}}"
-                                        vote="{{$votes[$role]}}"
+                                        vote="{{$votes[$role] ?? json_encode([
+                                            'role'=>$role,
+                                            'voting'=>'Yes'
+                                        ])}}"
                                         id="{{$vote_id}}"
                                         :admin="true"
                                     ></voting>
                                 @else
                                     <voting
                                         endpoint="{{route('app.conference.action.voting.change',[$conf_id,$vote_id])}}"
-                                        vote="{{$votes[$role]}}"
+                                        vote="{{$votes[$role] ?? json_encode(array([
+                                            'role'=>$role,
+                                            'voting'=>'Yes'
+                                        ]))}}"
                                         id="{{$vote_id}}"
                                         :admin="false"
                                     ></voting>
