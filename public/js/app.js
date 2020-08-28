@@ -2329,9 +2329,14 @@ __webpack_require__.r(__webpack_exports__);
         'role': that.role
       }).then(function (res) {
         if (res.data.status === "fail") {
-          var _res$data$msg;
+          switch (res.data.msg) {
+            case "os/speaked":
+              window.alert("Start Fail, you had speaked before.");
+              break;
 
-          alert("Fail, " + ((_res$data$msg = res.data.msg) !== null && _res$data$msg !== void 0 ? _res$data$msg : "unknown"));
+            default:
+              window.alert("Start Fail, unknown issue.");
+          }
         }
       })["catch"](function (error) {
         console.error(error);
