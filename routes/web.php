@@ -17,9 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['reset'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/password', 'HomeController@changePasswordUI')->name('home.password');
 Route::get('/manage/users', 'ManageController@users')->name('manage.users');
 Route::get('/manage', 'ManageController@home')->name('manage.home');
 Route::get('/app', 'AppController@home')->name('app.home');
@@ -55,3 +56,4 @@ Route::post('/app/conference/{conferenceID}/note/accept', 'ConferenceNoteControl
 Route::post('/app/conference/{conferenceID}/note/add', 'ConferenceNoteController@add')->name('app.conference.action.note.add');
 Route::post('/app/conference/{conferenceID}/vote/add', 'ConferenceVotingController@add')->name('app.conference.action.voting.add');
 Route::post('/app/conference/{conferenceID}/vote/{voteID}/change', 'ConferenceVotingController@change')->name('app.conference.action.voting.change');
+Route::post('/home/password', 'HomeController@changePassword')->name('home.action.password');

@@ -38739,7 +38739,7 @@ var render = function() {
       "li",
       {
         staticClass:
-          "list-group-item d-flex justify-content-between align-items-center",
+          "list-group-item  d-flex justify-content-between align-items-center",
         attrs: {
           "data-toggle": "collapse",
           "data-target": "#collapse_role_" + _vm.vote.id
@@ -38782,7 +38782,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -38796,7 +38796,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -38812,7 +38812,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -38840,7 +38840,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -38856,7 +38856,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -38870,7 +38870,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "RC btn btn-default w-100",
+                  staticClass: "RC btn btn-outline-secondary w-100",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
