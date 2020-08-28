@@ -1,6 +1,8 @@
+git stash
+git pull
 composer install --no-dev
 composer dump-autoload
-php artisan migrate:refresh --seed
+php artisan migrate
 php artisan config:clear
 php artisan config:cache
 php artisan cache:clear
