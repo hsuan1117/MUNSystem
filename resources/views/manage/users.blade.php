@@ -8,6 +8,7 @@
                     <div class="card-header">{{ __('Users list') }}</div>
                     <!--<div class="alert alert-danger">If you don't see anything, that means you don't have permission.</div>-->
                     <div class="card-body">
+                        @if($admin)
                         <ol class="list-group">
                             @foreach($users as $user)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
@@ -26,8 +27,12 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </ol>
+                        @else
+                            <div class="alert alert-danger">
+                                Permission Denied
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

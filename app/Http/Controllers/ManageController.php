@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Gate;
+
 class ManageController extends Controller
 {
     public function __construct()
@@ -16,7 +18,9 @@ class ManageController extends Controller
     {
         //print_r(User::all());
         $users = User::all();
-        return view('manage.users')->with("users",$users);
+        return view('manage.users')
+            ->with("users",$users)
+            ->with("admin",Gate::check('is-admin',[]));
     }
 
     //目錄
