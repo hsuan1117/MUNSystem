@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes(['reset'=>false]);
-
+Route::view('/about', 'about.home')->name('about.home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/password', 'HomeController@changePasswordUI')->name('home.password');
 Route::get('/manage/users', 'ManageController@users')->name('manage.users');

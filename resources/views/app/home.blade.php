@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('App') }}</div>
 
                     <div class="card-body">
-                        Welcome to SweetMUN !!!
+                        Welcome to {{ config('app.name', "Sweet MUN") }} !!!<br>
                         <a href="{{route('app.conference.home')}}">Conference</a>
                     </div>
                 </div>
