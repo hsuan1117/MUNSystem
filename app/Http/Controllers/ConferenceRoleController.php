@@ -9,6 +9,7 @@ use App\Conference;
 use App\Participant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ConferenceRoleController extends Controller
 {
@@ -29,20 +30,29 @@ class ConferenceRoleController extends Controller
     {
         $roleName = $request->input("role");
         $userId    = $request->input("id");
-        DB::table("participants")->insert([
-            'id'=>$conferenceID,
-            'role'=>$roleName,
-            'account'=>$userId
-        ]);
-        DB::table("roll_calls")->updateOrInsert([
-            'id'=>$conferenceID,
-            'role'=>$roleName
-        ],[
-            'id'=>$conferenceID,
-            'role'=>$roleName,
-            'status'=>"A"
-        ]);
-        Speech::updateOrInsert([
+        if(intval($userId) > count(User::all()) || intval($userId) <= 0 ){
+            return view('app.conference.role.add')
+                ->with("role",$roleName)
+                ->with("id",$userId)
+                ->with('message',"Fail to add {$userId} into {$roleName}, user {$userId} doesn't exist!")
+                ->with("page","after")
+                ->with("status","error");
+        }
+        if(Gate::check('is-admin',[$conferenceID])){
+            DB::table("participants")->insert([
+                'id'=>$conferenceID,
+                'role'=>$roleName,
+                'account'=>$userId
+            ]);
+            DB::table("roll_calls")->updateOrInsert([
+                'id'=>$conferenceID,
+                'role'=>$roleName
+            ],[
+                'id'=>$conferenceID,
+                'role'=>$roleName,
+                'status'=>"A"
+            ]);
+            Speech::updateOrInsert([
                 'id'=>$conferenceID,
                 'role'=>$roleName
             ],[
@@ -51,11 +61,21 @@ class ConferenceRoleController extends Controller
                 'article' => "default"
             ]);
 
-        return view('app.conference.role.add')
-            ->with("role",$roleName)
-            ->with("id",$userId)
-            ->with("page","after")
-            ->with("status","ok");
+            return view('app.conference.role.add')
+                ->with("role",$roleName)
+                ->with("id",$userId)
+                ->with('message',"Added {$userId} into {$roleName}")
+                ->with("page","after")
+                ->with("status","ok");
+        }else{
+            return view('app.conference.role.add')
+                ->with("role",$roleName)
+                ->with("id",$userId)
+                ->with('message',"Permission Denied")
+                ->with("page","after")
+                ->with("status","error");
+        }
+
     }
     //目錄
     public function home($conferenceID)

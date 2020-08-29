@@ -6,8 +6,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Add Role') }}</div>
-                    @if ( $page == "before")
-                        <div class="card-body">
+                    <div class="card-body">
+                        @if ( $page == "before")
+                            <div class="alert alert-info">
+                                The role of chairs must be 【chair】!
+                            </div>
                             <form method="POST" action="{{route('app.conference.action.role.add',$conf_id)}}">
                                 @csrf
                                 <div class="form-group">
@@ -17,19 +20,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="id">User ID</label>
-                                    <input id="id" class="form-control" type="number" max="{{$maxID}}" name="id">
+                                    <input id="id" class="form-control" type="number" min="1" max="{{$maxID}}" name="id">
                                 </div>
-                                <button type="submit" class="form-control btn btn-outline-primary" id="btn_submit" class="btn btn-info">Submit</button>
+                                <button type="submit" class="form-control btn btn-outline-primary" id="btn_submit"
+                                        class="btn btn-info">Submit
+                                </button>
                             </form>
-                        </div>
-                    @else
-                        <div class="card-body">
-                            Added Role<br>
-                            {{$status}}
-                            {{$role}}
-                            {{$id}}
-                        </div>
-                    @endif
+                        @else
+                            @if ($status == "ok")
+                                <div class="alert alert-success">
+                                    {{$message}}
+                                </div>
+                            @elseif($status == "error")
+                                <div class="alert alert-danger">
+                                    {{$message}}
+                                </div>
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
