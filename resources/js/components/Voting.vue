@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import 'sweetalert2/src/sweetalert2.scss'
 export default {
     name: "voting",
     props: ['endpoint','vote','admin','id'],
@@ -46,15 +48,31 @@ export default {
                 if(res.data.status === "fail"){
                     switch (res.data.msg){
                         case 'permission/denied':
-                            window.alert("Change Fail, you don't have permission.")
+                            Swal.fire({
+                                title: 'Error!',
+                                text: "Vote fail, you don't have permission.",
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            })
                             break;
                         default:
-                            window.alert("Change Fail, unknown issue.")
+                            Swal.fire({
+                                title: 'Error!',
+                                text: "Vote Fail, unknown issue.",
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            })
                     }
+                }else{
+                    Swal.fire({
+                        title: 'Success!',
+                        text: "Vote success.",
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then(()=>{
+                        location.reload()
+                    })
                 }
-                setTimeout(()=>{
-                    location.reload();
-                },500);
             }).catch((error) => {
                 console.error(error)
             })
