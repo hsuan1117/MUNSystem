@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::define('is-admin', function ($user,$conf_id) {
+        Gate::define('is-admin', function ($user,$conf_id=null,$access_role=null) {
             $isAdmin = false;
             if(!is_null($conf_id)){
                 $userData = Participant::where("id",$conf_id)
@@ -35,6 +35,11 @@ class AuthServiceProvider extends ServiceProvider
                 if(!is_null($userData)){
                     if($userData->role == "chair"){
                         $isAdmin = true;
+                    }
+                    if(!is_null($access_role)){
+                        if($userData->role == $access_role){
+                            $isAdmin = true;
+                        }
                     }
                 }
             }
