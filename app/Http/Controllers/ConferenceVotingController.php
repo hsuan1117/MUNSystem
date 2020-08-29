@@ -22,19 +22,31 @@ class ConferenceVotingController extends Controller {
         $role = $request->input('role');
         $id = $request->input('id');
         $voting = $request->input('voting');
-        Voting::where("conf_id", $conferenceID)
-            ->updateOrInsert([
-                'id'=>$id
-            ],[
-                'conf_id'=>$conferenceID,
-                'vote_id'=>$voteID,
-                'role'=>$role,
-                'voting' => $voting
+        if(Gate::check('is-admin',[$conferenceID,$role])){
+            Voting::where("conf_id", $conferenceID)
+                ->updateOrInsert([
+                    'id'=>$id
+                ],[
+                    'conf_id'=>$conferenceID,
+                    'vote_id'=>$voteID,
+                    'role'=>$role,
+                    'voting' => $voting
+                ]);
+            return response()->json([
+                'role' => $role,
+                'voting' => $voting,
+                'status'=>'ok',
+                'message'=>'Success'
             ]);
-        return response()->json([
-            'role' => $role,
-            'voting' => $voting,
-        ]);
+        }else{
+            return response()->json([
+                'role' => $role,
+                'voting' => $voting,
+                'status'=>'fail',
+                'msg'=>'permission/denied'
+            ]);
+        }
+
     }
 
     public function add(Request $request, $conferenceID) {

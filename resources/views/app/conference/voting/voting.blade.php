@@ -30,10 +30,10 @@
                                 @else
                                     <voting
                                         endpoint="{{route('app.conference.action.voting.change',[$conf_id,$vote_id])}}"
-                                        vote="{{$votes[$role] ?? json_encode(array([
+                                        vote="{{$votes[$role] ?? json_encode([
                                             'role'=>$role,
                                             'voting'=>'Yes'
-                                        ]))}}"
+                                        ])}}"
                                         id="{{$vote_id}}"
                                         :admin="false"
                                     ></voting>

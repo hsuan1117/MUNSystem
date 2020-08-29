@@ -2449,8 +2449,20 @@ __webpack_require__.r(__webpack_exports__);
         'role': that.vote.role,
         'id': that.vote.id
       }).then(function (res) {
-        console.table(res.data);
-        location.reload();
+        if (res.data.status === "fail") {
+          switch (res.data.msg) {
+            case 'permission/denied':
+              window.alert("Change Fail, you don't have permission.");
+              break;
+
+            default:
+              window.alert("Change Fail, unknown issue.");
+          }
+        }
+
+        setTimeout(function () {
+          location.reload();
+        }, 500);
       })["catch"](function (error) {
         console.error(error);
       });

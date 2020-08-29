@@ -43,8 +43,18 @@ export default {
                 'role': that.vote.role,
                 'id':that.vote.id
             }).then((res) => {
-                console.table(res.data)
-                location.reload()
+                if(res.data.status === "fail"){
+                    switch (res.data.msg){
+                        case 'permission/denied':
+                            window.alert("Change Fail, you don't have permission.")
+                            break;
+                        default:
+                            window.alert("Change Fail, unknown issue.")
+                    }
+                }
+                setTimeout(()=>{
+                    location.reload();
+                },500);
             }).catch((error) => {
                 console.error(error)
             })
