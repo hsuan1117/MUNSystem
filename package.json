@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "sweetalert2": "^9.17.1",
         "vuejs-countdown-timer": "^2.1.2"
     }
 }
