@@ -6,10 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Add Conference') }}</div>
+                    <div class="card-body">
                     @if ( $page == "before")
-                        <div class="card-body">
-                            Add Conference
-                            <hr>
+
                             <form method="POST" action="{{route('app.conference.action.add')}}">
                                 @csrf
                                 <label for="title">title</label>
@@ -20,14 +19,19 @@
                                 </div>
                                 <input type="submit" id="btn_submit" class="btn btn-info">
                             </form>
-                        </div>
+
                     @else
-                        <div class="card-body">
-                            Added Conference<br>
-                            {{$status}}
-                            {{$title}}
-                        </div>
+                        @if ($status == "ok")
+                            <div class="alert alert-success">
+                                {{$message}}
+                            </div>
+                        @elseif($status == "error")
+                            <div class="alert alert-danger">
+                                {{$message}}
+                            </div>
+                        @endif
                     @endif
+                    </div>
                 </div>
             </div>
         </div>

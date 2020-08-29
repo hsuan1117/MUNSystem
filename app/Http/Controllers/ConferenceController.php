@@ -24,6 +24,14 @@ class ConferenceController extends Controller
     {
         $confTitle = $request->input("title");
         $confPWD   = $request->input("password");
+
+        if(!is_null(Conference::where('title',$confTitle)->first())){
+            return view('app.conference.add')
+                ->with("message","Conference 【{$confTitle}】 exists!")
+                ->with("page","after")
+                ->with("status","error");
+        }
+
         $id = Conference::insertGetId([
             'title' => $confTitle,
             'password'=>$confPWD,
@@ -39,7 +47,7 @@ class ConferenceController extends Controller
                 'conferences'=>$origin
             ]);
         return view('app.conference.add')
-            ->with("title",$confTitle)
+            ->with("message","Conference 【{$confTitle}】 created!")
             ->with("page","after")
             ->with("status","ok");
     }
