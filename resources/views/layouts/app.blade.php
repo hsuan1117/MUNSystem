@@ -64,8 +64,8 @@
                                         {{ __('Conference Home') }}
                                     </a>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('app.home') }}">
-                                    {{ __('App') }}
+                                <a class="dropdown-item" href="{{ route('app.conference.home') }}">
+                                    {{ __('App/Conference') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('manage.home') }}">
                                     {{ __('Manage') }}
