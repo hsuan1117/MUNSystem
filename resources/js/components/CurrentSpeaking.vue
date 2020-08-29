@@ -7,6 +7,7 @@
                 :end-time="start"
                 :interval="1000"
                 :end-label="'Last time:'"
+                end-text="Finished!"
                 label-position="begin"
                 :minutes-txt="'minutes'"
                 :seconds-txt="'seconds'">
@@ -27,7 +28,7 @@ export default {
     props: ['endpoint'],
     mounted() {
         this.getRole()
-        setInterval(this.getRole,1000)
+        setInterval(this.getRole,300)
     },
     data(){
       return {
@@ -44,7 +45,9 @@ export default {
                 //console.log(start)
                 self.start = start || ""
             }).catch((error) => {
-                console.error(error)
+                self.role = "None"
+                let start = new Date((Date.now()-5000)).toISOString()
+                self.start = start || ""
             })
         }
     }

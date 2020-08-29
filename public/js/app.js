@@ -2114,6 +2114,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2121,7 +2122,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['endpoint'],
   mounted: function mounted() {
     this.getRole();
-    setInterval(this.getRole, 1000);
+    setInterval(this.getRole, 300);
   },
   data: function data() {
     return {
@@ -2138,7 +2139,9 @@ __webpack_require__.r(__webpack_exports__);
 
         self.start = start || "";
       })["catch"](function (error) {
-        console.error(error);
+        self.role = "None";
+        var start = new Date(Date.now() - 5000).toISOString();
+        self.start = start || "";
       });
     }
   }
@@ -42142,6 +42145,7 @@ var render = function() {
               "end-time": _vm.start,
               interval: 1000,
               "end-label": "Last time:",
+              "end-text": "Finished!",
               "label-position": "begin",
               "minutes-txt": "minutes",
               "seconds-txt": "seconds"
