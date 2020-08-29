@@ -13,11 +13,11 @@
                         <ol class="list-group">
                             @foreach($roles as $role=>$account)
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                                    data-toggle="collapse" data-target="#collapse_role_{{$role}}"
+                                    data-toggle="collapse" data-target="#collapse_role_{{md5($role)}}"
                                 >
                                     {{$role}}
                                 </li>
-                                <div class="collapse" id="collapse_role_{{$role}}">
+                                <div class="collapse" id="collapse_role_{{md5($role)}}">
                                     @foreach($account as $user)
                                         <ol>{{$user}}</ol>
                                     @endforeach
