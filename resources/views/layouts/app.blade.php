@@ -102,4 +102,15 @@
     </main>
 </div>
 </body>
+<footer>
+    <p>Hsuan | Sweet MUN</p>
+</footer>
+<style>
+    footer p {
+        float: right;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+</style>
 </html>
