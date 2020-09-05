@@ -12,14 +12,14 @@
                             @if ($status=='ok')
                                 <div class="alert alert-success">
                                     {{$msg}}
-                                    <button type="button" class="close" data-dismiss="alert" >
+                                    <button type="button" class="close" data-dismiss="alert">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @else
                                 <div class="alert alert-danger">
                                     {{$msg}}
-                                    <button type="button" class="close" data-dismiss="alert" >
+                                    <button type="button" class="close" data-dismiss="alert">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -30,7 +30,8 @@
                                 Set Step
                             </div>
                             <div class="card-body">
-                                <form action="{{route('app.conference.settings.action.setStep',$conferenceID)}}" method="post">
+                                <form action="{{route('app.conference.settings.action.setStep',$conferenceID)}}"
+                                      method="post">
                                     @csrf
                                     <div class="form-group">
                                         <select name="step" id='step' class="form-control">
@@ -42,7 +43,22 @@
                                 </form>
                             </div>
                         </div>
-
+                        &nbsp;
+                        <div class="card-header bg-danger">
+                            Dangerous Zone
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Delete Conference
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('app.conference.settings.action.delete',$conferenceID)}}"
+                                      method="post">
+                                    @csrf
+                                    <button type="submit" class="btn-outline-danger form-control">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

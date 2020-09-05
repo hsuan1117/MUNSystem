@@ -41,6 +41,21 @@ class ConferenceSettingsController extends Controller
             ->with('conferenceID',$conferenceID);
     }
 
+    public function delete(Request $request,$conferenceID) {
+        if (Gate::check('is-admin',[null])) {
+            $conf = Conference::where("id", $conferenceID)->first();
+            $conf->delete();
+            return redirect()->route('app.conference.home');
+        }else{
+            $status = false;
+            $message = "Permission Denied!";
+            return view('app.conference.settings.home')
+                ->with('status',$status?'ok':'fail')
+                ->with('msg',$message)
+                ->with('conferenceID',$conferenceID);
+        }
+    }
+
     //目錄
     public function home($conferenceID)
     {

@@ -45,7 +45,8 @@ Route::get('/app/conference/{conferenceID}/vote/{voteID}/voting', 'ConferenceVot
 
 Route::post('/app/conference/add', 'ConferenceController@addConference')->name('app.conference.action.add');
 Route::post('/app/conference/join', 'ConferenceController@joinConference')->name('app.conference.action.join');
-Route::post('/app/conference/{conferenceID}/settings', 'ConferenceSettingsController@setStep')->name('app.conference.settings.action.setStep');
+Route::post('/app/conference/{conferenceID}/settings/setStep', 'ConferenceSettingsController@setStep')->name('app.conference.settings.action.setStep');
+Route::post('/app/conference/{conferenceID}/settings/delete', 'ConferenceSettingsController@delete')->name('app.conference.settings.action.delete');
 Route::post('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRole')->name('app.conference.action.role.add');
 Route::post('/app/conference/{conferenceID}/rollCall/change', 'ConferenceRollCallController@change')->name('app.conference.action.roleCall.change');
 Route::post('/app/conference/{conferenceID}/openingSpeech/change', 'ConferenceOpeningSpeechController@change')->name('app.conference.action.openingSpeech.change');
