@@ -29,7 +29,7 @@ Route::get('/app/conference/add', 'ConferenceController@addConferenceUI')->name(
 Route::get('/app/conference/join', 'ConferenceController@joinConferenceUI')->name('app.conference.join');
 Route::get('/app/conference/{conferenceID}', 'ConferenceController@showConference')->name('app.conference.conference');
 Route::get('/app/conference/{conferenceID}/step', 'ConferenceController@getStep')->name('app.conference.action.getStep');
-Route::get('/app/conference/{conferenceID}/settings', 'ConferenceSettingsController@home')->name('app.conference.settings');
+Route::get('/app/conference/{conferenceID}/settings', 'ConferenceSettingsController@home')->name('app.conference.settings.home');
 Route::get('/app/conference/{conferenceID}/speaking', 'ConferenceController@getSpeaking')->name('app.conference.action.getSpeaking');
 Route::get('/app/conference/{conferenceID}/role', 'ConferenceRoleController@home')->name('app.conference.role.home');
 Route::get('/app/conference/{conferenceID}/role/add', 'ConferenceRoleController@addRoleUI')->name('app.conference.role.add');
