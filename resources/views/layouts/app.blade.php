@@ -108,7 +108,7 @@
 <style>
     footer p {
         float: right;
-        position: absolute;
+        position: fixed;
         bottom: 10px;
         right: 10px;
     }
