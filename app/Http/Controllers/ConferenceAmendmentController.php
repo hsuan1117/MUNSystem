@@ -21,8 +21,16 @@ class ConferenceAmendmentController extends Controller {
     public function add(Request $request, $conferenceID) {
         $role = Participant::where("id", $conferenceID)
             ->where("account", Auth::id())
-            ->first()
-            ->role;
+            ->first();
+        if(is_null($role)){
+            return view("app.conference.amendment.add")
+                ->with("page", "after")
+                ->with("msg", "You don't have a role/country. Please call admin.")
+                ->with("conf_id",$conferenceID)
+                ->with("status", "fail");
+        }else{
+            $role = $role->role;
+        }
         $title = $request->input('title');
         $article = $request->input('article');
         $method = $request->input('method');
@@ -37,6 +45,7 @@ class ConferenceAmendmentController extends Controller {
         return view("app.conference.amendment.add")
             ->with("page", "after")
             ->with("title", $title)
+            ->with("conf_id",$conferenceID)
             ->with("status", "ok");
     }
 

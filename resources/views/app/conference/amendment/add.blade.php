@@ -33,10 +33,18 @@
                         </div>
                     @else
                         <div class="card-body">
-                            Added Amendment<br>
-                            {{$status}}
-                            {{$title}}
-                            <a href="" ></a>
+                            @if ($status == "ok")
+                                <div class="alert alert-success">
+                                    <h4 class="alert-heading">Amendment Added!</h4>
+                                    {{$msg}}
+                                </div>
+                            @else
+                                <div class="alert alert-danger">
+                                    <h4 class="alert-heading">Something Wrong!</h4>
+                                    {{$msg}}
+                                </div>
+                                <!--<a href="{{route('app.conference.role.home',$conf_id)}}" class="w-100 btn btn-primary">Conference Roles (Countries)</a>-->
+                            @endif
                         </div>
                     @endif
                 </div>
