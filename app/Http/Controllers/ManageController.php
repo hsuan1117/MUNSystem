@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class ManageController extends Controller
 {
@@ -23,12 +24,12 @@ class ManageController extends Controller
             ->with("admin",Gate::check('is-admin',[]));
     }
 
-    public function loginAs($userId){
-        echo "get";
+    public function login(Request $request){
+        $userId = $request->input('id');
         if(Gate::check('is-admin',[])){
             Auth::loginUsingId($userId);
         }
-        return redirect()->route('about.home');
+        return redirect()->route('app.conference.home');
     }
 
     //目錄
