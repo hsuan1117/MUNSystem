@@ -23,6 +23,14 @@ class ManageController extends Controller
             ->with("admin",Gate::check('is-admin',[]));
     }
 
+    public function loginAs($userId){
+        echo "get";
+        if(Gate::check('is-admin',[])){
+            Auth::loginUsingId($userId);
+        }
+        return redirect()->route('about.home');
+    }
+
     //目錄
     public function home()
     {

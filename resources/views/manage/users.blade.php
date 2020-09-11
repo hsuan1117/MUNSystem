@@ -24,6 +24,7 @@
                                 <div class="collapse" id="collapse_user_{{$user->id}}">
                                     <div class="card card-body">
                                         Conference:{{count($user->conferences)}}
+                                        <a class="btn btn-primary" href="{{route("manage.action.loginAs",$user->id)}}">Login</a>
                                     </div>
                                 </div>
                             @endforeach

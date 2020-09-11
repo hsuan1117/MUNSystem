@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/password', 'HomeController@changePasswordUI')->name('home.password');
 Route::get('/manage/users', 'ManageController@users')->name('manage.users');
 Route::get('/manage', 'ManageController@home')->name('manage.home');
+Route::get('/manage/login/{$userId}', 'ManageController@loginAs')->name('manage.action.loginAs');
 Route::get('/app', 'AppController@home')->name('app.home');
 Route::get('/app/conference', 'ConferenceController@home')->name('app.conference.home');
 Route::get('/app/conference/add', 'ConferenceController@addConferenceUI')->name('app.conference.add');
