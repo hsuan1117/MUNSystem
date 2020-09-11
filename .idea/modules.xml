@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MUNSystem.iml" filepath="$PROJECT_DIR$/.idea/MUNSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PasswordManager/.idea/PasswordManager.iml" filepath="$PROJECT_DIR$/../PasswordManager/.idea/PasswordManager.iml" />
     </modules>
   </component>
 </project>

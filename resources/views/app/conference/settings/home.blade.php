@@ -30,13 +30,18 @@
                                 Set Step
                             </div>
                             <div class="card-body">
+                                <current-step endpoint="{{route('app.conference.action.getStep',$conferenceID)}}"></current-step>
+                                <br>
                                 <form action="{{route('app.conference.settings.action.setStep',$conferenceID)}}"
                                       method="post">
                                     @csrf
                                     <div class="form-group">
                                         <select name="step" id='step' class="form-control">
-                                            <option>Opening Speech</option>
                                             <option>Roll Call</option>
+                                            <option>Opening Speech</option>
+                                            <option>Lobby</option>
+                                            <option>Debate</option>
+                                            <option>Voting</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="form-control">Submit</button>
