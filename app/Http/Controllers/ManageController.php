@@ -26,6 +26,7 @@ class ManageController extends Controller
     //目錄
     public function home()
     {
-        return view('manage.home');
+        return view('manage.home')
+            ->with("isAdmin",Gate::check('is-admin',[null]));
     }
 }

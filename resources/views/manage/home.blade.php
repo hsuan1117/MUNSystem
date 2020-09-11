@@ -9,7 +9,9 @@
 
                     <div class="card-body">
                         Manage Users here<br>
-                        <a href="{{route('manage.users')}}">Users List</a>
+                        @if($isAdmin)
+                            <a href="{{route('manage.users')}}">Users List</a>
+                        @endif
                     </div>
                 </div>
             </div>
