@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Sweet MUN') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -103,7 +103,7 @@
 </div>
 </body>
 <footer>
-    <p>Hsuan | Sweet MUN</p>
+    <p>{{ config('app.name', 'Sweet MUN') }} | <a href="{{route("about.home")}}">Hsuan</a></p>
 </footer>
 <style>
     footer p {
