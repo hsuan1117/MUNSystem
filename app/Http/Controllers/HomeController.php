@@ -28,6 +28,11 @@ class HomeController extends Controller
                 ->with('status', 'error')
                 ->with('message', 'Two passwords are not the same!!');
         }
+        if(strlen($cfm_pwd) < 8 ){
+            return view('auth.passwords.change')
+                ->with('status', 'error')
+                ->with('message', 'The password must be at least 8 characters!!');
+        }
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $user_id = Auth::id();
