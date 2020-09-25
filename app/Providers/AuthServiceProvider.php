@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
                     ->where("account",Auth::id())
                     ->first();
                 if(!is_null($userData)){
-                    if($userData->role == "chair"){
+                    if(strtolower($userData->role) == "chair"){
                         $isAdmin = true;
                     }
                     if(!is_null($access_role)){
